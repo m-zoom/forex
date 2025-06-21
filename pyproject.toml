@@ -4,6 +4,11 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.11"
 dependencies = [
+    "flask>=3.1.1",
+    "matplotlib>=3.10.3",
+    "mplfinance>=0.12.10b0",
+    "numpy>=2.3.1",
+    "pandas>=2.3.0",
     "psutil>=7.0.0",
     "pydantic>=2.11.7",
     "pytz>=2025.2",

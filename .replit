@@ -26,7 +26,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "pip install pandas numpy matplotlib mplfinance requests scipy scikit-learn tensorflow && python main.py"
+args = "python web_app.py"
 waitForPort = 5000
 
 [[workflows.workflow]]
@@ -38,4 +38,4 @@ task = "shell.exec"
 args = "cd /tmp && pip install pandas numpy matplotlib mplfinance requests scipy scikit-learn tensorflow && python main.py"
 
 [deployment]
-run = ["sh", "-c", "pip install pandas numpy matplotlib mplfinance requests scipy scikit-learn tensorflow && python main.py"]
+run = ["sh", "-c", "python web_app.py"]

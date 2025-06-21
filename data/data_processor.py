@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 from scipy.signal import argrelextrema
 from sklearn.preprocessing import MinMaxScaler
-import talib
 
 class DataProcessor:
     def __init__(self, logger):

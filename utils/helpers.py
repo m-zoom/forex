@@ -114,8 +114,8 @@ def validate_data_file(filepath: str) -> Dict[str, Any]:
                 else:
                     dates = pd.to_datetime(df.index)
                 result['date_range'] = {
-                    'start': dates.min().strftime('%Y-%m-%d %H:%M:%S'),
-                    'end': dates.max().strftime('%Y-%m-%d %H:%M:%S')
+                    'start': str(dates.min()),
+                    'end': str(dates.max())
                 }
             except Exception as e:
                 result['errors'].append(f"Date parsing error: {str(e)}")
