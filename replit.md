@@ -90,7 +90,11 @@ This is an AI-powered desktop application built with Python and Tkinter that aut
 
 ```
 Changelog:
-- June 21, 2025. Initial setup
+- June 21, 2025. Initial setup with desktop Tkinter application
+- June 21, 2025. Removed web applications per user preference
+- June 21, 2025. Fixed logger initialization and core functionality testing
+- June 21, 2025. Fixed API validation unpacking error in validate_api_key method
+- June 21, 2025. Desktop application ready for local deployment with working API validation
 ```
 
 ## User Preferences

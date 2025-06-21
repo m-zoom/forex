@@ -246,24 +246,33 @@ class FinancialDataAPI:
             "XOM", "CVX", "COP", "PG", "JNJ", "UNH", "HD", "WMT"
         ]
     
-    def validate_api_key(self) -> bool:
+    def validate_api_key(self) -> tuple[bool, str]:
         """Validate API key by making a test request"""
         self.logger.info("Validating API key")
         
         if not self.api_key or self.api_key == "demo":
-            self.logger.warning("Using demo API key - functionality may be limited")
-            return False
+            message = "Using demo API key - functionality may be limited"
+            self.logger.warning(message)
+            return False, message
         
-        # Try to fetch a small amount of data for AAPL
-        test_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-        df = self.get_data_chunk("AAPL", test_date, test_date, "daily")
-        
-        if df is not None:
-            self.logger.info("API key validation successful")
-            return True
-        else:
-            self.logger.error("API key validation failed")
-            return False
+        try:
+            # Try to fetch a small amount of data for AAPL
+            test_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+            df = self.get_data_chunk("AAPL", test_date, test_date, "daily")
+            
+            if df is not None and not df.empty:
+                message = "API key validation successful"
+                self.logger.info(message)
+                return True, message
+            else:
+                message = "API key validation failed - no data returned"
+                self.logger.error(message)
+                return False, message
+                
+        except Exception as e:
+            message = f"API validation error: {str(e)}"
+            self.logger.error(message)
+            return False, message
 
 # For backward compatibility, create an alias
 ForexAPI = FinancialDataAPI
