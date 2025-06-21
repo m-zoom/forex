@@ -14,20 +14,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Forex Pattern Recognition App"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "forex_pattern_app"
-
-[[workflows.workflow]]
-name = "Forex Pattern Recognition App"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python simple_web_app.py"
-waitForPort = 5000
 
 [[workflows.workflow]]
 name = "forex_pattern_app"

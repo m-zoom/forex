@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is an AI-powered desktop application built with Python and Tkinter that automatically detects and analyzes forex chart patterns in real-time. The system integrates with the Alpha Vantage API to fetch live forex data and uses machine learning models to identify common chart patterns like Head and Shoulders, Double Tops/Bottoms, Triangles, and Support/Resistance levels.
+This is an AI-powered desktop application built with Python and Tkinter that automatically detects and analyzes forex chart patterns in real-time. The system integrates with the Financial Datasets API to fetch live forex data and uses machine learning models to identify common chart patterns like Head and Shoulders, Double Tops/Bottoms, Triangles, and Support/Resistance levels.
 
 ## System Architecture
 
@@ -97,4 +97,5 @@ Changelog:
 
 ```
 Preferred communication style: Simple, everyday language.
+Application type: Desktop Tkinter GUI only - no web applications
 ```

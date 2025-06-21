@@ -75,27 +75,19 @@ def main():
         # Import application modules after dependency check
         from gui.main_window import MainWindow
         from utils.logger import setup_logger
-        from utils.config import Config
+        from utils.config import config
         
         # Setup logging
-        logger = setup_logger()
+        logger = setup_logger('ForexPatternApp')
         logger.info("=" * 50)
         logger.info("Starting Forex Pattern Recognition System v1.0.0")
         logger.info("=" * 50)
         
         # Load configuration
-        config = Config()
         logger.info("Configuration loaded successfully")
         
-        # Validate API key
-        api_key = config.get('alpha_vantage_api_key')
-        if not api_key or api_key == 'your_api_key_here':
-            logger.warning("No valid Alpha Vantage API key configured")
-            messagebox.showwarning(
-                "API Key Required", 
-                "Please set your Alpha Vantage API key in the environment variable 'ALPHA_VANTAGE_API_KEY' or in the configuration file.\n\n" +
-                "You can get a free API key from: https://www.alphavantage.co/support/#api-key"
-            )
+        # Check API configuration
+        logger.info("Desktop Tkinter application starting...")
         
         # Create main application window
         root = tk.Tk()
@@ -144,7 +136,7 @@ def main():
         # Try to log the error if logger is available
         try:
             from utils.logger import setup_logger
-            logger = setup_logger()
+            logger = setup_logger('ForexPatternApp')
             logger.error(f"Application startup failed: {str(e)}", exc_info=True)
         except:
             print(f"Critical error: {str(e)}")
