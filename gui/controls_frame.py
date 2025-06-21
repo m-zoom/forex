@@ -43,7 +43,7 @@ class ControlsFrame(ttk.Frame):
         canvas.bind_all("<MouseWheel>", _on_mousewheel)
         
         # Title
-        title_label = ttk.Label(scrollable_frame, text="🔧 Control Panel", font=("Arial", 14, "bold"))
+        title_label = ttk.Label(scrollable_frame, text="Control Panel", font=("Arial", 14, "bold"))
         title_label.pack(pady=(10,20))
         
         # Create sections
@@ -55,19 +55,20 @@ class ControlsFrame(ttk.Frame):
         
     def create_data_section(self, parent):
         """Create data fetching controls"""
-        data_frame = ttk.LabelFrame(parent, text="📊 Data Fetching", padding=15)
+        data_frame = ttk.LabelFrame(parent, text="Data Fetching", padding=15)
         data_frame.pack(fill=tk.X, padx=10, pady=5)
         
-        # Currency pair selection
-        ttk.Label(data_frame, text="Currency Pair:", font=("Arial", 10, "bold")).pack(anchor=tk.W)
-        self.symbol_var = tk.StringVar(value="EUR/USD")
+        # Stock symbol selection
+        ttk.Label(data_frame, text="Stock Symbol:", font=("Arial", 10, "bold")).pack(anchor=tk.W)
+        self.symbol_var = tk.StringVar(value="AAPL")
         symbol_combo = ttk.Combobox(
             data_frame,
             textvariable=self.symbol_var,
             values=[
-                "EUR/USD", "GBP/USD", "USD/JPY", "USD/CHF", 
-                "AUD/USD", "USD/CAD", "NZD/USD", "EUR/GBP",
-                "EUR/JPY", "GBP/JPY", "AUD/JPY", "EUR/CHF"
+                "AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "META", "NFLX", "NVDA",
+                "JPM", "BAC", "WFC", "GS", "MS", "C", "V", "MA",
+                "SPY", "QQQ", "IWM", "EFA", "VTI", "BND", "GLD", "SLV",
+                "XOM", "CVX", "COP", "PG", "JNJ", "UNH", "HD", "WMT"
             ],
             state="readonly",
             width=18
@@ -100,7 +101,7 @@ class ControlsFrame(ttk.Frame):
         # Fetch button
         self.fetch_button = ttk.Button(
             data_frame,
-            text="📈 Fetch Data",
+            text="Fetch Data",
             command=self.fetch_data,
             style="Accent.TButton"
         )
@@ -114,7 +115,7 @@ class ControlsFrame(ttk.Frame):
         
     def create_pattern_section(self, parent):
         """Create pattern detection controls"""
-        pattern_frame = ttk.LabelFrame(parent, text="🔍 Pattern Detection", padding=15)
+        pattern_frame = ttk.LabelFrame(parent, text="Pattern Detection", padding=15)
         pattern_frame.pack(fill=tk.X, padx=10, pady=5)
         
         # Pattern types to detect
@@ -124,19 +125,19 @@ class ControlsFrame(ttk.Frame):
         patterns_grid.pack(fill=tk.X, pady=(5,10))
         
         self.head_shoulders_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(patterns_grid, text="📐 Head & Shoulders", 
+        ttk.Checkbutton(patterns_grid, text="Head & Shoulders", 
                        variable=self.head_shoulders_var).grid(row=0, column=0, sticky=tk.W)
         
         self.double_top_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(patterns_grid, text="🔄 Double Top/Bottom", 
+        ttk.Checkbutton(patterns_grid, text="Double Top/Bottom", 
                        variable=self.double_top_var).grid(row=1, column=0, sticky=tk.W)
         
         self.triangle_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(patterns_grid, text="📊 Triangle Patterns", 
+        ttk.Checkbutton(patterns_grid, text="Triangle Patterns", 
                        variable=self.triangle_var).grid(row=2, column=0, sticky=tk.W)
         
         self.support_resistance_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(patterns_grid, text="📏 Support/Resistance", 
+        ttk.Checkbutton(patterns_grid, text="Support/Resistance", 
                        variable=self.support_resistance_var).grid(row=3, column=0, sticky=tk.W)
         
         # Detection sensitivity
@@ -165,13 +166,13 @@ class ControlsFrame(ttk.Frame):
         
         # Auto-detect option
         self.auto_detect_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(pattern_frame, text="🔄 Auto-detect after data fetch", 
+        ttk.Checkbutton(pattern_frame, text="Auto-detect after data fetch", 
                        variable=self.auto_detect_var).pack(anchor=tk.W, pady=(5,10))
         
         # Detect button
         self.detect_button = ttk.Button(
             pattern_frame,
-            text="🔍 Detect Patterns",
+            text="Detect Patterns",
             command=self.detect_patterns,
             style="Accent.TButton"
         )

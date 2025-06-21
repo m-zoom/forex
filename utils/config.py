@@ -131,6 +131,10 @@ class Config:
         with open(self.config_file, 'w') as f:
             self.config.write(f)
     
+    def save(self):
+        """Alias for save_config for compatibility"""
+        self.save_config()
+    
     def get_api_config(self) -> Dict[str, Any]:
         """Get API configuration"""
         return {

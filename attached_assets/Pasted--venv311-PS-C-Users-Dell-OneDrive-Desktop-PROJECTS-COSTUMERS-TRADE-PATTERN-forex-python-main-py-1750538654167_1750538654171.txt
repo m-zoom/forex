@@ -1,0 +1,66 @@
+
+(venv311) PS C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex> python main.py
+2025-06-21 21:41:19.337621: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-21 21:41:20.497758: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+21:41:21 - INFO - ==================================================
+21:41:21 - INFO - Starting Forex Pattern Recognition System v1.0.0
+21:41:21 - INFO - ==================================================
+21:41:21 - INFO - Configuration loaded successfully
+21:41:21 - INFO - Desktop Tkinter application starting...
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\gui\chart_frame.py:122: UserWarning: Glyph 128200 (\N{CHART WITH UPWARDS TREND}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\gui\chart_frame.py:125: UserWarning: Glyph 128200 (\N{CHART WITH UPWARDS TREND}) missing from font(s) DejaVu Sans.
+  self.canvas.draw()
+21:41:22 - INFO - Main UI setup completed
+21:41:22 - INFO - GUI initialized successfully
+21:41:22 - INFO - Application ready for use
+C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py:861: UserWarning: Glyph 128200 (\N{CHART WITH UPWARDS TREND}) missing from font(s) DejaVu Sans.
+  func(*args)
+21:41:23 - INFO - Status: Checking API connection...
+21:41:23 - INFO - Validating API key
+21:41:23 - INFO - Requesting AAPL data from 2025-06-20 to 2025-06-20...
+21:41:30 - INFO - Retrieved 1 records for 2025-06-20 to 2025-06-20
+21:41:30 - INFO - API key validation successful
+C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py:861: UserWarning: Glyph 128200 (\N{CHART WITH UPWARDS TREND}) missing from font(s) DejaVu Sans.
+  func(*args)
+21:41:30 - INFO - Status: API connection successful
+21:41:37 - INFO - Status: Fetching compact data for EUR/USD (5min)...
+21:41:37 - INFO - Fetching EUR/USD data with 5min interval for 30 days
+21:41:37 - INFO - Requesting EUR/USD data from 2025-05-22 to 2025-06-21...
+21:41:37 - ERROR - HTTP Error 400: {"error":"Invalid ticker","message":"Please provide a valid ticker from https://www.sec.gov/files/company_tickers.json"}
+21:41:38 - ERROR - HTTP Error 400: {"error":"Invalid ticker","message":"Please provide a valid ticker from https://www.sec.gov/files/company_tickers.json"}
+21:41:39 - ERROR - HTTP Error 400: {"error":"Invalid ticker","message":"Please provide a valid ticker from https://www.sec.gov/files/company_tickers.json"}
+21:41:39 - WARNING - No response for 2025-05-22-2025-06-21
+21:41:41 - INFO - Requesting EUR/USD data from 2025-05-22 to 2025-06-21...
+21:41:42 - ERROR - HTTP Error 400: {"error":"Invalid ticker","message":"Please provide a valid ticker from https://www.sec.gov/files/company_tickers.json"}
+21:41:43 - ERROR - HTTP Error 400: {"error":"Invalid ticker","message":"Please provide a valid ticker from https://www.sec.gov/files/company_tickers.json"}
+21:41:44 - ERROR - HTTP Error 400: {"error":"Invalid ticker","message":"Please provide a valid ticker from https://www.sec.gov/files/company_tickers.json"}
+21:41:44 - WARNING - No response for 2025-05-22-2025-06-21
+pany_tickers.json"}
+21:41:49 - ERROR - HTTP Error 400: {"error":"Invalid ticker","message":"Please provide a valid ticker from https://www.sec.gov/files/company_tickers.json"}
+21:41:50 - ERROR - HTTP Error 400: {"error":"Invalid ticker","message":"Please provide a valid ticker from https://www.sec.gov/files/company_tickers.json"}
+21:41:50 - WARNING - No response for 2025-05-22-2025-06-21
+21:41:57 - INFO - Application shutdown requested
+21:41:58 - WARNING - Failed to get data for 2025-05-22 to 2025-06-21 after 3 attempts
+21:41:58 - ERROR - No data retrieved for the entire period
+C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py:861: UserWarning: Glyph 128200 (\N{CHART WITH UPWARDS TREND}) missing from font(s) DejaVu Sans.
+  func(*args)
+21:41:58 - INFO - Status: Failed to fetch data - check your API key and symbol
+21:42:00 - ERROR - Error during application shutdown: 'Config' object has no attribute 'save'
+21:42:00 - INFO - Application shutdown completed
+invalid command name "2436935109504update_info_display"
+    while executing
+"2436935109504update_info_display"
+    ("after" script)
+
+
+
+
+
+
+
+
+
+
+
+

@@ -100,11 +100,11 @@ class ChartFrame(ttk.Frame):
         # Empty state message
         ax.text(0.5, 0.5, 
                 'Forex Chart Pattern Recognition System\n\n' +
-                '📈 No Data Available\n\n' +
+                'No Data Available\n\n' +
                 'Steps to get started:\n' +
-                '1. Select a currency pair (e.g., EUR/USD)\n' + 
+                '1. Select a stock symbol (e.g., AAPL)\n' + 
                 '2. Choose timeframe and data size\n' +
-                '3. Click "Fetch Data" to load forex data\n' +
+                '3. Click "Fetch Data" to load market data\n' +
                 '4. Click "Detect Patterns" to analyze patterns',
                 horizontalalignment='center', 
                 verticalalignment='center',
