@@ -1,0 +1,73 @@
+ python main.py
+2025-06-21 21:48:29.437804: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-21 21:48:30.603920: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+21:48:32 - INFO - ==================================================
+21:48:32 - INFO - Starting Forex Pattern Recognition System v1.0.0
+21:48:32 - INFO - ==================================================
+21:48:32 - INFO - Configuration loaded successfully
+21:48:32 - INFO - Desktop Tkinter application starting...
+21:48:33 - INFO - Main UI setup completed
+21:48:33 - INFO - GUI initialized successfully
+21:48:33 - INFO - Application ready for use
+21:48:33 - INFO - Status: Checking API connection...
+21:48:33 - INFO - Validating API key
+21:48:33 - INFO - Requesting AAPL data from 2025-06-20 to 2025-06-20...
+21:48:35 - INFO - Retrieved 1 records for 2025-06-20 to 2025-06-20
+21:48:35 - INFO - API key validation successful
+21:48:35 - INFO - Status: API connection successful
+21:51:47 - INFO - Status: Fetching compact data for AAPL (5min)...
+21:51:47 - INFO - Fetching AAPL data with 5min interval for 30 days
+21:51:47 - INFO - Requesting AAPL data from 2025-05-22 to 2025-06-21...
+21:51:51 - INFO - Retrieved 1188 records for 2025-05-22 to 2025-06-21
+21:51:51 - INFO - Successfully fetched 1188 records for AAPL
+21:51:51 - INFO - Data processing completed. Shape: (1188, 34)
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\_arg_validators.py:84: UserWarning: 
+
+ =================================================================
+
+   WARNING: YOU ARE PLOTTING SO MUCH DATA THAT IT MAY NOT BE
+            POSSIBLE TO SEE DETAILS (Candles, Ohlc-Bars, Etc.)
+   For more information see:
+   - https://github.com/matplotlib/mplfinance/wiki/Plotting-Too-Much-Data
+
+   TO SILENCE THIS WARNING, set `type='line'` in `mpf.plot()`
+   OR set kwarg `warn_too_much_data=N` where N is an integer
+   LARGER than the number of data points you want to plot.
+
+ ================================================================
+  warnings.warn('\n\n ================================================================= '+
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\plotting.py:476: UserWarning: Starting a Matplotlib GUI outside of the main thread will likely fail.
+  fig = plt.figure()
+21:51:52 - ERROR - Error creating candlestick chart: x and y must have same first dimension, but have shapes (1188,) and (1169,)
+21:51:52 - ERROR - Error updating chart: x and y must have same first dimension, but have shapes (1188,) and (1169,)
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\gui\chart_frame.py", line 149, in update_chart
+    self.create_candlestick_chart(data)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\gui\chart_frame.py", line 213, in create_candlestick_chart
+    fig, axes = mpf.plot(
+                ^^^^^^^^^
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\plotting.py", line 808, in plot
+    ax = _addplot_columns(panid,panels,ydata,apdict,xdates,config,colcount)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\plotting.py", line 1151, in _addplot_columns
+    ax.plot(xdates,ydata,linestyle=ls,color=color,linewidth=width,alpha=alpha,label=label)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\axes\_axes.py", line 1777, in plot
+    lines = [*self._get_lines(self, *args, data=data, **kwargs)]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\axes\_base.py", line 297, in __call__
+    yield from self._plot_args(
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\axes\_base.py", line 494, in _plot_args
+    raise ValueError(f"x and y must have same first dimension, but "
+ValueError: x and y must have same first dimension, but have shapes (1188,) and (1169,)
+21:51:56 - INFO - Status: Data loaded: 1188 points for AAPL (2025-05-22 04:00 to 2025-06-02 08:40)
+21:51:57 - INFO - Status: Analyzing data for patterns...
+21:51:58 - INFO - Detected 90 patterns
+21:51:59 - INFO - Status: Pattern detection complete: 90 patterns found (89 high confidence)
+21:52:07 - INFO - Application shutdown requested
+21:52:09 - INFO - Application closing gracefully
+21:52:09 - INFO - Application shutdown completed
+invalid command name "1361667450176update_info_display"
+    while executing
+"1361667450176update_info_display"
+    ("after" script)

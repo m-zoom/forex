@@ -178,20 +178,23 @@ class ChartFrame(ttk.Frame):
             # Moving average
             if self.show_ma_var.get():
                 if 'sma_20' in data.columns:
-                    ma20 = data['sma_20'].dropna()
-                    if not ma20.empty:
-                        addplot.append(mpf.make_addplot(ma20, color='blue', width=1.5, alpha=0.7))
+                    ma20 = data['sma_20'].reindex(plot_data.index)  # Ensure same index alignment
+                    addplot.append(mpf.make_addplot(ma20, color='blue', width=1.5, alpha=0.7))
                 else:
                     # Calculate MA if not available
-                    ma20 = data['close'].rolling(window=20).mean()
+                    ma20 = data['close'].rolling(window=20).mean().reindex(plot_data.index)
                     addplot.append(mpf.make_addplot(ma20, color='blue', width=1.5, alpha=0.7))
             
             # Bollinger Bands
             if self.show_bb_var.get():
                 if all(col in data.columns for col in ['bb_upper', 'bb_lower', 'bb_middle']):
-                    addplot.append(mpf.make_addplot(data['bb_upper'], color='gray', width=1, alpha=0.5))
-                    addplot.append(mpf.make_addplot(data['bb_lower'], color='gray', width=1, alpha=0.5))
-                    addplot.append(mpf.make_addplot(data['bb_middle'], color='orange', width=1, alpha=0.7))
+                    # Use the same index as plot_data to maintain alignment
+                    bb_upper = data['bb_upper'].reindex(plot_data.index)
+                    bb_lower = data['bb_lower'].reindex(plot_data.index)
+                    bb_middle = data['bb_middle'].reindex(plot_data.index)
+                    addplot.append(mpf.make_addplot(bb_upper, color='gray', width=1, alpha=0.5))
+                    addplot.append(mpf.make_addplot(bb_lower, color='gray', width=1, alpha=0.5))
+                    addplot.append(mpf.make_addplot(bb_middle, color='orange', width=1, alpha=0.7))
             
             # Volume
             show_volume = self.show_volume_var.get() and 'volume' in data.columns
@@ -243,7 +246,14 @@ class ChartFrame(ttk.Frame):
                 
         except Exception as e:
             self.main_window.logger.error(f"Error creating candlestick chart: {str(e)}")
-            raise
+            # Try fallback with line chart
+            try:
+                self.main_window.logger.info("Falling back to line chart")
+                self.create_line_chart(data)
+            except Exception as e2:
+                self.main_window.logger.error(f"Error creating fallback line chart: {str(e2)}")
+                # Final fallback to empty chart
+                self.create_empty_chart()
         
     def create_line_chart(self, data):
         """Create line chart"""
@@ -257,12 +267,11 @@ class ChartFrame(ttk.Frame):
             # Moving average
             if self.show_ma_var.get():
                 if 'sma_20' in data.columns:
-                    ma20 = data['sma_20'].dropna()
-                    if not ma20.empty:
-                        ax.plot(data.index, ma20, linewidth=1.5, color='red', alpha=0.7, label='MA(20)')
+                    ma20_data = data['sma_20']  # Keep NaN values for alignment
+                    ax.plot(data.index, ma20_data, linewidth=1.5, color='red', alpha=0.7, label='MA(20)')
                 else:
-                    ma20 = data['close'].rolling(window=20).mean()
-                    ax.plot(data.index, ma20, linewidth=1.5, color='red', alpha=0.7, label='MA(20)')
+                    ma20_data = data['close'].rolling(window=20).mean()
+                    ax.plot(data.index, ma20_data, linewidth=1.5, color='red', alpha=0.7, label='MA(20)')
                     
             # Bollinger Bands
             if self.show_bb_var.get() and all(col in data.columns for col in ['bb_upper', 'bb_lower']):
