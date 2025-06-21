@@ -299,7 +299,7 @@ class PatternDetector:
                             triangle_type = "Symmetrical Triangle"
                             signal = "Breakout Pending"
                     else:
-                        continue  # Not a valid triangle
+                        return patterns  # Not a valid triangle
                     
                     # Calculate convergence point
                     if upper_slope != lower_slope:
