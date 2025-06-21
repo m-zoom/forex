@@ -20,8 +20,10 @@ import base64
 # Add current directory to path for imports
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from utils import setup_logger, config
-from data import ForexAPI, DataProcessor
+from utils.logger import setup_logger
+from utils.config import config
+from data.forex_api import FinancialDataAPI as ForexAPI
+from data.data_processor import DataProcessor
 
 app = Flask(__name__)
 
