@@ -1,0 +1,1415 @@
+but how will user use it? do we need to train all the time? add gui.
+this is what we want to achiive
+"INTRODUCTION
+The Forex market operates 24/5 and involves complex price movements that traders analyze using technical analysis. One of the most widely used techniques is chart pattern recognition, which helps predict future price movements based on historical patterns. However, manual pattern identification is subjective and can lead to inconsistent trading decisions. This project proposes a computerized Forex chart pattern recognition system that leverages artificial intelligence (AI) and deep learning to automate pattern detection. The system will integrate with real-time Forex market data and provide traders with instant alerts on potential trading opportunities.
+
+PROBLEM STATEMENT
+Manual recognition of Forex chart patterns is:
+Time-consuming: Traders need to constantly monitor charts.
+Error-prone: Subjective interpretation leads to inconsistent results.
+Inefficient: Large data sets make manual analysis impractical.
+
+This project aims to develop an automated system that efficiently identifies chart patterns in real-time, providing traders with accurate and actionable insights.
+
+AIM AND OBJECTIVES
+The primary objectives of this project are:
+1.	To develop an AI-powered system that detects common Forex chart patterns.
+2.	To integrate real-time market data for live pattern recognition.
+3.	To provide accurate pattern identification with machine learning algorithms.
+4.	To reduce the time and effort required for traders to analyze charts.
+5.	To validate the system’s accuracy using historical Forex data.
+SCOPE AND LIMITATION
+The project focuses on developing an AI-driven Forex chart pattern recognition system. However, it has certain limitations:
+The system will analyze only predefined chart patterns (e.g., Head and Shoulders, Triangles, Double Tops/Bottoms).
+Real-time integration depends on third-party API data availability.
+The accuracy of predictions is dependent on the quality and quantity of training data.
+
+JUSTIFICATION
+This project is necessary because traders currently rely on subjective manual analysis, leading to inconsistencies. By automating pattern recognition with AI, the system aims to improve decision-making accuracy, save time, and enhance trading performance.
+
+REVIEW OF RELATED WORK
+1. Technical Analysis and Pattern Recognition
+Common chart patterns include:
+Head and Shoulders: Predicts trend reversals.
+Triangles (ascending, descending, symmetrical): Indicate breakout points.
+Double Tops and Bottoms: Signal trend reversals.
+
+2. Machine Learning in Financial Markets
+Machine learning models like Convolutional Neural Networks (CNNs) and Recurrent Neural Networks (RNNs) have been applied to financial market analysis with high accuracy.
+
+
+3. Existing Solutions
+Current platforms like MetaTrader 4/5 provide basic indicators but lack AI-driven pattern recognition. Our system aims to bridge this gap.
+SUMMARY OF REVIEW TABLE
+Category	Key Findings
+Technical Analysis	Traditional methods rely on manual pattern identification, which is time-consuming and subjective. Common patterns include Head and Shoulders, Triangles, and Double Tops/Bottoms.
+Machine Learning in Forex	AI models such as CNNs and LSTMs improve accuracy in financial market predictions. CNNs excel in recognizing chart patterns, while LSTMs analyze time-series price data.
+Existing Trading Platforms	Platforms like MetaTrader and TradingView provide technical indicators but lack AI-powered pattern recognition for real-time alerts.
+Automated Trading Systems	Rule-based systems execute trades based on predefined conditions but do not adapt to new patterns or changing market conditions.
+Research Gaps	Most existing solutions either lack real-time AI-driven pattern recognition or require human intervention, making them inefficient for fast-paced Forex trading.
+
+ 
+RESEARCH GAP
+Despite advancements in Forex trading analysis, several gaps exist in the current research and available technologies:
+Lack Of Real-Time Ai-Powered Pattern Recognition
+Most existing trading platforms (e.g., MetaTrader, TradingView) provide basic indicators but lack fully automated AI-driven pattern detection.
+Traders still need to manually analyze and confirm chart patterns, making the process inefficient.
+Limited Use Of Deep Learning For Pattern Detection
+Existing solutions primarily use rule-based approaches or traditional machine learning models, which struggle to identify complex chart patterns dynamically.
+Convolutional Neural Networks (CNNs) and Long Short-Term Memory (LSTMs) networks have shown potential but are not widely integrated into real-time Forex analysis.
+Dependence On Human Interpretation
+Manual chart pattern recognition is subjective, leading to inconsistencies among traders.
+AI-based systems can provide objective and standardized pattern detection but have not been fully utilized in Forex trading.
+Lack Of Adaptive Learning In Trading Systems
+Current algorithmic trading systems rely on predefined rules and do not learn from new market patterns.
+A deep learning-based system can continuously improve by learning from historical and real-time data.
+ 
+Limited Accessibility To Ai-Based Trading Tools
+AI-powered trading tools are mostly available to institutional investors and hedge funds.
+Retail traders lack access to user-friendly AI-driven Forex analysis tools that automate pattern recognition.
+
+METHODOLOGY
+1. Data Collection and Preprocessing
+Data Sources: Historical Forex data from APIs (e.g., Alpha Vantage, Binance, OANDA).
+Preprocessing: Normalize price data, transform into candlestick charts, and extract features.
+
+2. Pattern Recognition Techniques
+CNNs for Image Recognition.
+LSTMs for Time-Series Analysis.
+Pattern Matching Algorithms.
+
+3. System Development
+Frontend: Web-based dashboard for real-time chart visualization.
+Backend: Python-based AI model for pattern detection.
+Integration: API connection to live Forex data feeds.
+
+4. Performance Evaluation
+Metrics: Accuracy, recall, F1-score, and precision.
+Testing: Back-testing with historical Forex data.
+ 
+EXISTING FRAMEWORK 
+The current landscape of Forex trading platforms and pattern recognition systems includes various tools and technologies, but most lack fully automated AI-driven pattern recognition. The existing framework consists of:
+1. Traditional Technical Analysis Tools
+MetaTrader 4/5 (MT4/MT5): Provides technical indicators like Moving Averages, RSI, MACD, and Bollinger Bands, but relies on manual pattern identification.
+TradingView: Offers interactive charting tools and script-based automation but lacks deep learning-powered pattern recognition.
+ThinkorSwim by TD Ameritrade: Features advanced charting and back-testing but still requires manual analysis.
+2. Rule-Based Automated Trading Systems
+Many trading bots use predefined rules to execute trades based on simple conditions (e.g., crossing of Moving Averages).
+They do not have adaptive learning capabilities like machine learning models.
+3. AI in Financial Markets
+Some hedge funds and institutional traders leverage AI for predictive modeling, but these solutions are proprietary and inaccessible to retail traders.
+AI applications in Forex trading focus more on sentiment analysis and algorithmic trading rather than real-time pattern recognition.
+
+
+
+PROPOSED FRAMEWORK
+The system automates Forex chart pattern recognition using AI.
+Data Collection: Real-time & historical data from APIs.
+Pattern Recognition: CNNs for chart images, LSTMs for trend prediction.
+System Components: Web dashboard, AI model, alert system.
+Performance: Back-tested for accuracy, real-time alerts.
+
+EXPECTED RESULT
+An AI-powered Forex Chart Pattern Recognition System with high accuracy.
+A real-time dashboard providing pattern detection and alerts.
+Increased efficiency in Forex trading through automated technical analysis.
+A foundation for further research in algorithmic trading systems.
+
+REFERENCES
+1. Murphy, J. J. (1999). Technical Analysis of the Financial Markets.
+2. Brown, S. (2020). Machine Learning for Algorithmic Trading.
+3. Zhang, Y., & Aggarwal, C. (2019). Deep Learning for Time-Series Forecasting.
+4. Alpha Vantage API D
+"
+import os
+import requests
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import mplfinance as mpf
+import tensorflow as tf
+from scipy.signal import argrelextrema
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import precision_score, recall_score
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout, Conv1D, MaxPooling1D, Flatten
+from tensorflow.keras.callbacks import EarlyStopping
+from matplotlib.dates import DateFormatter
+import time
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
+import pytz
+from typing import List, Optional
+from pydantic import BaseModel
+
+# Load environment variables
+load_dotenv()
+
+# Set your API key
+API_KEY = os.getenv("FINANCIAL_DATASETS_API_KEY", "your_api_key_here")
+
+class Price(BaseModel):
+    time: str
+    open: float
+    close: float
+    high: float
+    low: float
+    volume: int
+
+class PriceResponse(BaseModel):
+    prices: List[Price]
+
+class PatternDetector:
+    def __init__(self, df, window=10):
+        """
+        Initialize pattern detector with price data
+        :param df: DataFrame with OHLCV data
+        :param window: Window size for peak/valley detection
+        """
+        self.df = df.copy()
+        self.window = window
+        self.find_peaks_valleys()
+        
+    def find_peaks_valleys(self):
+        """Identify local maxima (peaks) and minima (valleys) in price data"""
+        # Find peaks
+        high_idx = argrelextrema(self.df['high'].values, np.greater, order=self.window)[0]
+        self.df['peak'] = np.nan
+        self.df.iloc[high_idx, self.df.columns.get_loc('peak')] = self.df['high'].iloc[high_idx]
+        
+        # Find valleys
+        low_idx = argrelextrema(self.df['low'].values, np.less, order=self.window)[0]
+        self.df['valley'] = np.nan
+        self.df.iloc[low_idx, self.df.columns.get_loc('valley')] = self.df['low'].iloc[low_idx]
+        
+    def detect_head_shoulders(self, tolerance=0.015, min_duration=12, max_duration=144):
+        """
+        Detect Head and Shoulders pattern
+        :param tolerance: Price difference allowance
+        :param min_duration: Minimum pattern duration (periods)
+        :param max_duration: Maximum pattern duration (periods)
+        """
+        patterns = []
+        peaks = self.df.dropna(subset=['peak'])
+        
+        for i in range(1, len(peaks)-1):
+            # Identify potential head
+            head_idx = peaks.index[i]
+            head_price = peaks.iloc[i]['peak']
+            
+            # Left shoulder (left of head)
+            left_window = peaks.iloc[:i]
+            if len(left_window) < 1:
+                continue
+            left_shoulder_idx = left_window['peak'].idxmax()
+            left_shoulder_price = self.df.loc[left_shoulder_idx]['peak']
+            
+            # Right shoulder (right of head)
+            right_window = peaks.iloc[i+1:]
+            if len(right_window) < 1:
+                continue
+            right_shoulder_idx = right_window['peak'].idxmax()
+            right_shoulder_price = self.df.loc[right_shoulder_idx]['peak']
+            
+            # Duration check
+            duration = (right_shoulder_idx - left_shoulder_idx).total_seconds() / 300  # 5-min periods
+            if not (min_duration <= duration <= max_duration):
+                continue
+            
+            # Neckline (lowest points between shoulders)
+            neckline_left = self.df.loc[left_shoulder_idx:head_idx]['low'].min()
+            neckline_right = self.df.loc[head_idx:right_shoulder_idx]['low'].min()
+            neckline = min(neckline_left, neckline_right)
+            
+            # Pattern conditions
+            cond1 = head_price > left_shoulder_price * (1 + tolerance)  # Head higher than left shoulder
+            cond2 = head_price > right_shoulder_price * (1 + tolerance)  # Head higher than right shoulder
+            cond3 = abs(left_shoulder_price - right_shoulder_price) / head_price < tolerance  # Shoulders similar height
+            cond4 = neckline < min(left_shoulder_price, head_price)  # Neckline below shoulders
+            
+            if cond1 and cond2 and cond3 and cond4:
+                patterns.append({
+                    'type': 'Head and Shoulders',
+                    'start': left_shoulder_idx,
+                    'end': right_shoulder_idx,
+                    'head': head_idx,
+                    'neckline': neckline,
+                    'confidence': min(cond1, cond2, cond3)  # Simple confidence metric
+                })
+                
+        return patterns
+
+    def detect_inverse_head_shoulders(self, tolerance=0.015, min_duration=12, max_duration=144):
+        """
+        Detect Inverse Head and Shoulders pattern
+        :param tolerance: Price difference allowance
+        :param min_duration: Minimum pattern duration (periods)
+        :param max_duration: Maximum pattern duration (periods)
+        """
+        patterns = []
+        valleys = self.df.dropna(subset=['valley'])
+        
+        for i in range(1, len(valleys)-1):
+            # Identify potential head
+            head_idx = valleys.index[i]
+            head_price = valleys.iloc[i]['valley']
+            
+            # Left shoulder (left of head)
+            left_window = valleys.iloc[:i]
+            if len(left_window) < 1:
+                continue
+            left_shoulder_idx = left_window['valley'].idxmin()
+            left_shoulder_price = self.df.loc[left_shoulder_idx]['valley']
+            
+            # Right shoulder (right of head)
+            right_window = valleys.iloc[i+1:]
+            if len(right_window) < 1:
+                continue
+            right_shoulder_idx = right_window['valley'].idxmin()
+            right_shoulder_price = self.df.loc[right_shoulder_idx]['valley']
+            
+            # Duration check
+            duration = (right_shoulder_idx - left_shoulder_idx).total_seconds() / 300  # 5-min periods
+            if not (min_duration <= duration <= max_duration):
+                continue
+            
+            # Neckline (highest points between shoulders)
+            neckline_left = self.df.loc[left_shoulder_idx:head_idx]['high'].max()
+            neckline_right = self.df.loc[head_idx:right_shoulder_idx]['high'].max()
+            neckline = max(neckline_left, neckline_right)
+            
+            # Pattern conditions
+            cond1 = head_price < left_shoulder_price * (1 - tolerance)  # Head lower than left shoulder
+            cond2 = head_price < right_shoulder_price * (1 - tolerance)  # Head lower than right shoulder
+            cond3 = abs(left_shoulder_price - right_shoulder_price) / head_price < tolerance  # Shoulders similar height
+            cond4 = neckline > max(left_shoulder_price, head_price)  # Neckline above shoulders
+            
+            if cond1 and cond2 and cond3 and cond4:
+                patterns.append({
+                    'type': 'Inverse Head and Shoulders',
+                    'start': left_shoulder_idx,
+                    'end': right_shoulder_idx,
+                    'head': head_idx,
+                    'neckline': neckline,
+                    'confidence': min(cond1, cond2, cond3)  # Simple confidence metric
+                })
+                
+        return patterns
+
+    def detect_double_top(self, tolerance=0.015, min_duration=12, max_duration=72):
+        """
+        Detect Double Top pattern
+        :param tolerance: Price difference allowance
+        :param min_duration: Minimum pattern duration (periods)
+        :param max_duration: Maximum pattern duration (periods)
+        """
+        patterns = []
+        peaks = self.df.dropna(subset=['peak'])
+        
+        for i in range(len(peaks)-1):
+            peak1 = peaks.iloc[i]
+            for j in range(i+1, len(peaks)):
+                peak2 = peaks.iloc[j]
+                
+                # Duration check
+                duration = (peak2.name - peak1.name).total_seconds() / 300  # 5-min periods
+                if not (min_duration <= duration <= max_duration):
+                    continue
+                
+                # Price similarity
+                price_diff = abs(peak1['peak'] - peak2['peak']) / peak1['peak']
+                if price_diff > tolerance:
+                    continue
+                
+                # Trough between peaks
+                trough = self.df.loc[peak1.name:peak2.name]['low'].min()
+                
+                # Volume check (higher on first peak)
+                vol1 = self.df.loc[peak1.name]['volume']
+                vol2 = self.df.loc[peak2.name]['volume']
+                
+                patterns.append({
+                    'type': 'Double Top',
+                    'start': peak1.name,
+                    'end': peak2.name,
+                    'resistance': (peak1['peak'] + peak2['peak']) / 2,
+                    'trough': trough,
+                    'confidence': 1 - price_diff
+                })
+                
+        return patterns
+
+    def detect_double_bottom(self, tolerance=0.015, min_duration=12, max_duration=72):
+        """
+        Detect Double Bottom pattern
+        :param tolerance: Price difference allowance
+        :param min_duration: Minimum pattern duration (periods)
+        :param max_duration: Maximum pattern duration (periods)
+        """
+        patterns = []
+        valleys = self.df.dropna(subset=['valley'])
+        
+        for i in range(len(valleys)-1):
+            valley1 = valleys.iloc[i]
+            for j in range(i+1, len(valleys)):
+                valley2 = valleys.iloc[j]
+                
+                # Duration check
+                duration = (valley2.name - valley1.name).total_seconds() / 300  # 5-min periods
+                if not (min_duration <= duration <= max_duration):
+                    continue
+                
+                # Price similarity
+                price_diff = abs(valley1['valley'] - valley2['valley']) / valley1['valley']
+                if price_diff > tolerance:
+                    continue
+                
+                # Peak between valleys
+                peak = self.df.loc[valley1.name:valley2.name]['high'].max()
+                
+                patterns.append({
+                    'type': 'Double Bottom',
+                    'start': valley1.name,
+                    'end': valley2.name,
+                    'support': (valley1['valley'] + valley2['valley']) / 2,
+                    'peak': peak,
+                    'confidence': 1 - price_diff
+                })
+                
+        return patterns
+
+    def detect_triple_top(self, tolerance=0.015):
+        """Detect Triple Top pattern"""
+        patterns = []
+        double_tops = self.detect_double_top(tolerance)
+        
+        for dt in double_tops:
+            # Find third peak near resistance
+            after_df = self.df.loc[dt['end']:]
+            near_resistance = after_df[after_df['high'] > dt['resistance'] * (1 - tolerance)]
+            
+            if not near_resistance.empty:
+                third_peak = near_resistance.iloc[0]
+                patterns.append({
+                    'type': 'Triple Top',
+                    'start': dt['start'],
+                    'end': third_peak.name,
+                    'resistance': dt['resistance'],
+                    'confidence': dt['confidence'] * 0.9  # Slightly less confidence
+                })
+                
+        return patterns
+
+    def detect_triple_bottom(self, tolerance=0.015):
+        """Detect Triple Bottom pattern"""
+        patterns = []
+        double_bottoms = self.detect_double_bottom(tolerance)
+        
+        for db in double_bottoms:
+            # Find third valley near support
+            after_df = self.df.loc[db['end']:]
+            near_support = after_df[after_df['low'] < db['support'] * (1 + tolerance)]
+            
+            if not near_support.empty:
+                third_valley = near_support.iloc[0]
+                patterns.append({
+                    'type': 'Triple Bottom',
+                    'start': db['start'],
+                    'end': third_valley.name,
+                    'support': db['support'],
+                    'confidence': db['confidence'] * 0.9  # Slightly less confidence
+                })
+                
+        return patterns
+
+    def detect_triangles(self, tolerance=0.01, min_periods=20):
+        """
+        Detect triangle patterns (Ascending, Descending, Symmetrical)
+        :param tolerance: Price variation allowance
+        :param min_periods: Minimum pattern duration
+        """
+        patterns = []
+        
+        for i in range(min_periods, len(self.df)):
+            window = self.df.iloc[i-min_periods:i]
+            highs = window['high']
+            lows = window['low']
+            
+            # Fit trendlines
+            X = np.arange(len(highs)).reshape(-1, 1)
+            high_model = LinearRegression().fit(X, highs)
+            low_model = LinearRegression().fit(X, lows)
+            
+            # Ascending Triangle: horizontal resistance, rising support
+            if (abs(high_model.coef_[0]) < tolerance and 
+                low_model.coef_[0] > tolerance and
+                (highs.max() - highs.min()) / highs.mean() < tolerance * 2):
+                patterns.append({
+                    'type': 'Ascending Triangle',
+                    'start': window.index[0],
+                    'end': window.index[-1],
+                    'resistance': highs.mean(),
+                    'support_slope': low_model.coef_[0],
+                    'confidence': min(1, low_model.coef_[0] * 100)  # Based on slope
+                })
+            
+            # Descending Triangle: horizontal support, falling resistance
+            elif (abs(low_model.coef_[0]) < tolerance and 
+                  high_model.coef_[0] < -tolerance and
+                  (lows.max() - lows.min()) / lows.mean() < tolerance * 2):
+                patterns.append({
+                    'type': 'Descending Triangle',
+                    'start': window.index[0],
+                    'end': window.index[-1],
+                    'support': lows.mean(),
+                    'resistance_slope': high_model.coef_[0],
+                    'confidence': min(1, abs(high_model.coef_[0]) * 100)
+                })
+            
+            # Symmetrical Triangle: converging trendlines
+            elif (high_model.coef_[0] < 0 and 
+                  low_model.coef_[0] > 0 and 
+                  abs(high_model.coef_[0] - low_model.coef_[0]) < tolerance * 5):
+                patterns.append({
+                    'type': 'Symmetrical Triangle',
+                    'start': window.index[0],
+                    'end': window.index[-1],
+                    'convergence_rate': (high_model.coef_[0] - low_model.coef_[0]) / 2,
+                    'confidence': min(1, (abs(high_model.coef_[0]) + abs(low_model.coef_[0])) * 50)
+                })
+                
+        return patterns
+
+    def detect_flags(self, move_percent=0.05, consolidation_percent=0.02, min_pole=10, max_consolidation=20):
+        """
+        Detect Bullish and Bearish Flags
+        :param move_percent: Minimum price move percentage
+        :param consolidation_percent: Maximum consolidation range percentage
+        :param min_pole: Minimum pole duration (periods)
+        :param max_consolidation: Maximum consolidation duration (periods)
+        """
+        patterns = []
+        
+        for i in range(min_pole + max_consolidation, len(self.df)):
+            # Flagpole: significant price move
+            pole_start = i - min_pole - max_consolidation
+            pole_end = i - max_consolidation
+            pole_move = (self.df.iloc[pole_end]['close'] - self.df.iloc[pole_start]['open']) / self.df.iloc[pole_start]['open']
+            
+            if abs(pole_move) < move_percent:
+                continue
+                
+            # Consolidation period
+            consolidation = self.df.iloc[pole_end:i]
+            high_range = consolidation['high'].max() - consolidation['low'].min()
+            avg_price = (consolidation['high'].mean() + consolidation['low'].mean()) / 2
+            range_percent = high_range / avg_price
+            
+            if range_percent > consolidation_percent:
+                continue
+                
+            # Determine direction
+            direction = "Bullish" if pole_move > 0 else "Bearish"
+            
+            patterns.append({
+                'type': f"{direction} Flag",
+                'start': self.df.index[pole_start],
+                'end': self.df.index[i],
+                'pole_move': pole_move,
+                'consolidation_range': range_percent,
+                'confidence': min(1, abs(pole_move) / move_percent)
+            })
+            
+        return patterns
+
+    def detect_pennants(self, move_percent=0.05, min_pole=10, max_consolidation=15):
+        """
+        Detect Bullish and Bearish Pennants
+        :param move_percent: Minimum price move percentage
+        :param min_pole: Minimum pole duration (periods)
+        :param max_consolidation: Maximum consolidation duration (periods)
+        """
+        patterns = []
+        
+        for i in range(min_pole + max_consolidation, len(self.df)):
+            # Flagpole: significant price move
+            pole_start = i - min_pole - max_consolidation
+            pole_end = i - max_consolidation
+            pole_move = (self.df.iloc[pole_end]['close'] - self.df.iloc[pole_start]['open']) / self.df.iloc[pole_start]['open']
+            
+            if abs(pole_move) < move_percent:
+                continue
+                
+            # Consolidation period with converging trendlines
+            consolidation = self.df.iloc[pole_end:i]
+            if len(consolidation) < 5:
+                continue
+                
+            # Fit trendlines
+            X = np.arange(len(consolidation)).reshape(-1, 1)
+            high_model = LinearRegression().fit(X, consolidation['high'])
+            low_model = LinearRegression().fit(X, consolidation['low'])
+            
+            # Pennant should have converging trendlines
+            if not ((high_model.coef_[0] < 0 and low_model.coef_[0] > 0) or 
+                    (high_model.coef_[0] > 0 and low_model.coef_[0] < 0)):
+                continue
+                
+            # Determine direction
+            direction = "Bullish" if pole_move > 0 else "Bearish"
+            
+            patterns.append({
+                'type': f"{direction} Pennant",
+                'start': self.df.index[pole_start],
+                'end': self.df.index[i],
+                'convergence': high_model.coef_[0] - low_model.coef_[0],
+                'confidence': min(1, abs(pole_move) / move_percent)
+            })
+            
+        return patterns
+
+    def detect_rectangles(self, tolerance=0.015, min_periods=15, min_touches=4):
+        """
+        Detect Bullish and Bearish Rectangles
+        :param tolerance: Price boundary tolerance
+        :param min_periods: Minimum pattern duration
+        :param min_touches: Minimum touches on support/resistance
+        """
+        patterns = []
+        
+        for i in range(min_periods, len(self.df)):
+            window = self.df.iloc[i-min_periods:i]
+            
+            # Calculate resistance and support
+            resistance = window['high'].max()
+            support = window['low'].min()
+            mean_price = (resistance + support) / 2
+            
+            # Check if prices stay within boundaries
+            if (window['high'] > resistance * (1 + tolerance)).any() or \
+               (window['low'] < support * (1 - tolerance)).any():
+                continue
+                
+            # Count touches on support and resistance
+            resistance_touches = sum(window['high'] >= resistance * (1 - tolerance))
+            support_touches = sum(window['low'] <= support * (1 + tolerance))
+            
+            if resistance_touches + support_touches < min_touches:
+                continue
+                
+            # Determine breakout direction
+            breakout_idx = min(i + 5, len(self.df) - 1)  # Look ahead 25min
+            breakout_price = self.df.iloc[breakout_idx]['close']
+            breakout = "Bullish" if breakout_price > resistance else "Bearish"
+            
+            patterns.append({
+                'type': f"{breakout} Rectangle",
+                'start': window.index[0],
+                'end': window.index[-1],
+                'resistance': resistance,
+                'support': support,
+                'confidence': min(1, (resistance_touches + support_touches) / (min_touches * 1.5))
+            })
+            
+        return patterns
+
+    def detect_wedges(self, min_periods=20):
+        """
+        Detect Rising and Falling Wedges
+        :param min_periods: Minimum pattern duration
+        """
+        patterns = []
+        
+        for i in range(min_periods, len(self.df)):
+            window = self.df.iloc[i-min_periods:i]
+            
+            # Fit trendlines
+            X = np.arange(len(window)).reshape(-1, 1)
+            high_model = LinearRegression().fit(X, window['high'])
+            low_model = LinearRegression().fit(X, window['low'])
+            
+            # Rising Wedge - both trendlines rising, converging
+            if (high_model.coef_[0] > 0 and 
+                low_model.coef_[0] > 0 and 
+                high_model.coef_[0] < low_model.coef_[0]):
+                patterns.append({
+                    'type': 'Rising Wedge',
+                    'start': window.index[0],
+                    'end': window.index[-1],
+                    'upper_slope': high_model.coef_[0],
+                    'lower_slope': low_model.coef_[0],
+                    'confidence': min(1, (high_model.coef_[0] + low_model.coef_[0]) * 100)
+                })
+                
+            # Falling Wedge - both trendlines falling, converging
+            elif (high_model.coef_[0] < 0 and 
+                  low_model.coef_[0] < 0 and 
+                  abs(high_model.coef_[0]) < abs(low_model.coef_[0])):
+                patterns.append({
+                    'type': 'Falling Wedge',
+                    'start': window.index[0],
+                    'end': window.index[-1],
+                    'upper_slope': high_model.coef_[0],
+                    'lower_slope': low_model.coef_[0],
+                    'confidence': min(1, (abs(high_model.coef_[0]) + abs(low_model.coef_[0])) * 100)
+                })
+                
+        return patterns
+
+    def detect_cup_handle(self, cup_min=30, cup_max=100, handle_min=10, handle_max=30, depth_threshold=0.05):
+        """
+        Detect Cup and Handle pattern
+        :param cup_min: Minimum cup duration (periods)
+        :param cup_max: Maximum cup duration (periods)
+        :param handle_min: Minimum handle duration (periods)
+        :param handle_max: Maximum handle duration (periods)
+        :param depth_threshold: Minimum cup depth percentage
+        """
+        patterns = []
+        
+        for i in range(cup_max + handle_max, len(self.df)):
+            # Cup formation
+            cup_start_idx = i - cup_max - handle_max
+            cup_end_idx = i - handle_max
+            cup = self.df.iloc[cup_start_idx:cup_end_idx]
+            
+            if len(cup) < cup_min:
+                continue
+                
+            # Cup should be U-shaped
+            cup_depth = (cup['high'].max() - cup['low'].min()) / cup['high'].max()
+            if cup_depth < depth_threshold:
+                continue
+                
+            # Cup sides
+            cup_left = cup.iloc[:len(cup)//3]
+            cup_right = cup.iloc[2*len(cup)//3:]
+            
+            # Left side should decline, right side rise
+            left_model = LinearRegression().fit(np.arange(len(cup_left)).reshape(-1, 1), cup_left['low'])
+            right_model = LinearRegression().fit(np.arange(len(cup_right)).reshape(-1, 1), cup_right['low'])
+            
+            if left_model.coef_[0] > 0 or right_model.coef_[0] < 0:  # Not U-shaped
+                continue
+                
+            # Handle formation - small downward drift
+            handle = self.df.iloc[cup_end_idx:i]
+            if len(handle) < handle_min or len(handle) > handle_max:
+                continue
+                
+            handle_model = LinearRegression().fit(np.arange(len(handle)).reshape(-1, 1), handle['low'])
+            
+            if handle_model.coef_[0] > 0:  # Not downward drift
+                continue
+                
+            patterns.append({
+                'type': 'Cup and Handle',
+                'start': cup.index[0],
+                'end': handle.index[-1],
+                'cup_depth': cup_depth,
+                'handle_depth': (handle['high'].max() - handle['low'].min()) / handle['high'].max(),
+                'confidence': min(1, cup_depth / depth_threshold * 0.5)
+            })
+            
+        return patterns
+
+    def detect_inverse_cup_handle(self, cup_min=30, cup_max=100, handle_min=10, handle_max=30, depth_threshold=0.05):
+        """
+        Detect Inverse Cup and Handle pattern
+        :param cup_min: Minimum cup duration (periods)
+        :param cup_max: Maximum cup duration (periods)
+        :param handle_min: Minimum handle duration (periods)
+        :param handle_max: Maximum handle duration (periods)
+        :param depth_threshold: Minimum cup depth percentage
+        """
+        patterns = []
+        
+        for i in range(cup_max + handle_max, len(self.df)):
+            # Cup formation
+            cup_start_idx = i - cup_max - handle_max
+            cup_end_idx = i - handle_max
+            cup = self.df.iloc[cup_start_idx:cup_end_idx]
+            
+            if len(cup) < cup_min:
+                continue
+                
+            # Inverse cup should be inverted U-shaped
+            cup_depth = (cup['high'].max() - cup['low'].min()) / cup['low'].min()
+            if cup_depth < depth_threshold:
+                continue
+                
+            # Cup sides
+            cup_left = cup.iloc[:len(cup)//3]
+            cup_right = cup.iloc[2*len(cup)//3:]
+            
+            # Left side should rise, right side decline
+            left_model = LinearRegression().fit(np.arange(len(cup_left)).reshape(-1, 1), cup_left['high'])
+            right_model = LinearRegression().fit(np.arange(len(cup_right)).reshape(-1, 1), cup_right['high'])
+            
+            if left_model.coef_[0] < 0 or right_model.coef_[0] > 0:  # Not inverse U-shaped
+                continue
+                
+            # Handle formation - small upward drift
+            handle = self.df.iloc[cup_end_idx:i]
+            if len(handle) < handle_min or len(handle) > handle_max:
+                continue
+                
+            handle_model = LinearRegression().fit(np.arange(len(handle)).reshape(-1, 1), handle['high'])
+            
+            if handle_model.coef_[0] < 0:  # Not upward drift
+                continue
+                
+            patterns.append({
+                'type': 'Inverse Cup and Handle',
+                'start': cup.index[0],
+                'end': handle.index[-1],
+                'cup_depth': cup_depth,
+                'handle_depth': (handle['high'].max() - handle['low'].min()) / handle['low'].min(),
+                'confidence': min(1, cup_depth / depth_threshold * 0.5)
+            })
+            
+        return patterns
+
+    def detect_rounding(self, min_periods=30, curvature_threshold=0.001):
+        """
+        Detect Rounding Bottom and Rounding Top patterns
+        :param min_periods: Minimum pattern duration
+        :param curvature_threshold: Minimum curvature value
+        """
+        patterns = []
+        
+        for i in range(min_periods, len(self.df)):
+            window = self.df.iloc[i-min_periods:i]
+            X = np.arange(len(window))
+            
+            # Rounding Bottom: U-shaped curve
+            bottom_model = np.polyfit(X, window['low'], 2)
+            if bottom_model[0] > curvature_threshold:  # Positive curvature (U-shape)
+                patterns.append({
+                    'type': 'Rounding Bottom',
+                    'start': window.index[0],
+                    'end': window.index[-1],
+                    'curvature': bottom_model[0],
+                    'confidence': min(1, bottom_model[0] / curvature_threshold)
+                })
+                
+            # Rounding Top: Inverted U-shaped curve
+            top_model = np.polyfit(X, window['high'], 2)
+            if top_model[0] < -curvature_threshold:  # Negative curvature (inverted U)
+                patterns.append({
+                    'type': 'Rounding Top',
+                    'start': window.index[0],
+                    'end': window.index[-1],
+                    'curvature': top_model[0],
+                    'confidence': min(1, abs(top_model[0]) / curvature_threshold)
+                })
+                
+        return patterns
+
+    def detect_diamonds(self, min_periods=30):
+        """
+        Detect Diamond Top and Bottom patterns
+        :param min_periods: Minimum pattern duration
+        """
+        patterns = []
+        
+        for i in range(min_periods, len(self.df)):
+            window = self.df.iloc[i-min_periods:i]
+            mid_point = len(window) // 2
+            
+            # First half should show expanding volatility
+            first_half = window.iloc[:mid_point]
+            first_range = first_half['high'] - first_half['low']
+            if not first_range.is_monotonic_increasing:
+                continue
+                
+            # Second half should show contracting volatility
+            second_half = window.iloc[mid_point:]
+            second_range = second_half['high'] - second_half['low']
+            if not second_range.is_monotonic_decreasing:
+                continue
+                
+            # Determine if top or bottom
+            if window.iloc[0]['close'] > window.iloc[-1]['close']:
+                pattern_type = 'Diamond Top'
+            else:
+                pattern_type = 'Diamond Bottom'
+                
+            patterns.append({
+                'type': pattern_type,
+                'start': window.index[0],
+                'end': window.index[-1],
+                'max_volatility': max(first_range.max(), second_range.max()),
+                'confidence': min(1, (len(window) / min_periods) * 0.5)
+            })
+            
+        return patterns
+
+    def detect_broadening(self, min_periods=20, expansion_threshold=0.1):
+        """
+        Detect Broadening Formation
+        :param min_periods: Minimum pattern duration
+        :param expansion_threshold: Minimum range expansion percentage
+        """
+        patterns = []
+        
+        for i in range(min_periods, len(self.df)):
+            window = self.df.iloc[i-min_periods:i]
+            price_range = window['high'] - window['low']
+            
+            # Skip if initial range is zero to avoid division by zero
+            if price_range.iloc[0] == 0:
+                continue
+                
+            # Calculate expansion safely
+            expansion_ratio = price_range.iloc[-1] / price_range.iloc[0]
+            expansion = expansion_ratio - 1
+            
+            if expansion > expansion_threshold:
+                patterns.append({
+                    'type': 'Broadening Formation',
+                    'start': window.index[0],
+                    'end': window.index[-1],
+                    'expansion': expansion,
+                    'confidence': min(1, expansion)
+                })
+                
+        return patterns
+
+    def detect_channels(self, min_periods=20, slope_threshold=0.001, parallel_threshold=0.1):
+        """
+        Detect Price Channels (Uptrend and Downtrend)
+        :param min_periods: Minimum pattern duration
+        :param slope_threshold: Minimum slope value
+        :param parallel_threshold: Maximum slope difference
+        """
+        patterns = []
+        
+        for i in range(min_periods, len(self.df)):
+            window = self.df.iloc[i-min_periods:i]
+            
+            # Fit trendlines to highs and lows
+            X = np.arange(len(window)).reshape(-1, 1)
+            high_model = LinearRegression().fit(X, window['high'])
+            low_model = LinearRegression().fit(X, window['low'])
+            
+            # Check if parallel
+            slope_diff = abs(high_model.coef_[0] - low_model.coef_[0]) / max(abs(high_model.coef_[0]), 0.001)
+            if slope_diff > parallel_threshold:
+                continue
+                
+            # Check significant slope
+            if abs(high_model.coef_[0]) < slope_threshold:
+                continue
+                
+            # Determine direction
+            direction = "Uptrend" if high_model.coef_[0] > 0 else "Downtrend"
+            
+            patterns.append({
+                'type': f'{direction} Price Channel',
+                'start': window.index[0],
+                'end': window.index[-1],
+                'slope': high_model.coef_[0],
+                'channel_width': high_model.predict([[0]])[0] - low_model.predict([[0]])[0],
+                'confidence': min(1, abs(high_model.coef_[0]) / slope_threshold)
+            })
+            
+        return patterns
+
+    def detect_all(self):
+        """Detect all patterns"""
+        patterns = []
+        patterns.extend(self.detect_head_shoulders())
+        patterns.extend(self.detect_inverse_head_shoulders())
+        patterns.extend(self.detect_double_top())
+        patterns.extend(self.detect_double_bottom())
+        patterns.extend(self.detect_triple_top())
+        patterns.extend(self.detect_triple_bottom())
+        patterns.extend(self.detect_triangles())
+        patterns.extend(self.detect_flags())
+        patterns.extend(self.detect_pennants())
+        patterns.extend(self.detect_rectangles())
+        patterns.extend(self.detect_wedges())
+        patterns.extend(self.detect_cup_handle())
+        patterns.extend(self.detect_inverse_cup_handle())
+        patterns.extend(self.detect_rounding())
+        patterns.extend(self.detect_diamonds())
+        patterns.extend(self.detect_broadening())
+        patterns.extend(self.detect_channels())
+        
+        # Sort by end time
+        patterns.sort(key=lambda x: x['end'])
+        return patterns
+
+    def plot_pattern(self, pattern):
+        """Visualize a detected pattern"""
+        start = pattern['start']
+        end = pattern['end']
+        
+        # Get pattern data plus some context
+        idx_start = max(0, self.df.index.get_loc(start) - 20)
+        idx_end = min(len(self.df), self.df.index.get_loc(end) + 20)
+        plot_data = self.df.iloc[idx_start:idx_end]
+        
+        # Create plot
+        fig, ax = plt.subplots(figsize=(14, 7))
+        ax.plot(plot_data.index, plot_data['close'], label='Price')
+        
+        # Pattern-specific annotations
+        if pattern['type'] == 'Head and Shoulders':
+            ax.scatter(pattern['start'], self.df.loc[pattern['start']]['high'], s=100, c='red', label='Left Shoulder')
+            ax.scatter(pattern['head'], self.df.loc[pattern['head']]['high'], s=100, c='blue', label='Head')
+            ax.scatter(pattern['end'], self.df.loc[pattern['end']]['high'], s=100, c='green', label='Right Shoulder')
+            ax.axhline(y=pattern['neckline'], color='purple', linestyle='--', label='Neckline')
+            
+        elif 'Triangle' in pattern['type']:
+            x = [pattern['start'], pattern['end']]
+            if pattern['type'] == 'Ascending Triangle':
+                ax.plot(x, [pattern['resistance'], pattern['resistance']], 'r--', label='Resistance')
+                # Add support line
+                start_price = self.df.loc[pattern['start']]['low']
+                end_price = self.df.loc[pattern['end']]['low']
+                ax.plot(x, [start_price, end_price], 'g--', label='Support')
+            # Similar annotations for other triangle types...
+            
+        # Add title and labels
+        plt.title(f"{pattern['type']} Pattern (Confidence: {pattern.get('confidence', 0.5)*100:.1f}%)")
+        plt.xlabel('Time')
+        plt.ylabel('Price')
+        plt.legend()
+        plt.grid(True)
+        plt.show()
+
+
+
+class PatternPredictor:
+    def __init__(self, df, pattern_types, lookback=60, test_size=0.2):
+        """
+        Initialize pattern predictor
+        :param df: OHLCV DataFrame
+        :param pattern_types: List of pattern types to predict
+        :param lookback: Number of periods for input sequences
+        :param test_size: Proportion of data for testing
+        """
+        self.df = df.copy()
+        self.pattern_types = pattern_types
+        self.lookback = lookback
+        self.test_size = test_size
+        self.scaler = MinMaxScaler()
+        
+    def prepare_data(self):
+        """Prepare data for pattern prediction"""
+        # Create features: OHLC + Volume
+        features = self.df[['open', 'high', 'low', 'close', 'volume']].values
+        scaled_features = self.scaler.fit_transform(features)
+        
+        # Create targets (one-hot encoded patterns)
+        detector = PatternDetector(self.df)
+        all_patterns = detector.detect_all()
+        
+        # Create pattern labels
+        pattern_labels = np.zeros((len(self.df), len(self.pattern_types)))
+        pattern_times = {ptype: [] for ptype in self.pattern_types}
+        
+        for pattern in all_patterns:
+            if pattern['type'] in self.pattern_types:
+                pidx = self.pattern_types.index(pattern['type'])
+                start_idx = self.df.index.get_loc(pattern['start'])
+                end_idx = self.df.index.get_loc(pattern['end'])
+                pattern_labels[start_idx:end_idx+1, pidx] = 1
+                pattern_times[pattern['type']].append((start_idx, end_idx))
+        
+        # Create sequences
+        X, y = [], []
+        for i in range(self.lookback, len(scaled_features)):
+            X.append(scaled_features[i-self.lookback:i])
+            y.append(pattern_labels[i])
+            
+        X, y = np.array(X), np.array(y)
+        
+        # Train-test split (chronological)
+        split_idx = int(len(X) * (1 - self.test_size))
+        X_train, X_test = X[:split_idx], X[split_idx:]
+        y_train, y_test = y[:split_idx], y[split_idx:]
+        
+        return X_train, X_test, y_train, y_test, pattern_times
+
+    def build_model(self, input_shape, output_shape):
+        """Build CNN-LSTM model for pattern prediction"""
+        model = Sequential([
+            Conv1D(64, 3, activation='relu', input_shape=input_shape),
+            MaxPooling1D(2),
+            LSTM(128, return_sequences=True),
+            Dropout(0.3),
+            LSTM(64),
+            Dropout(0.3),
+            Dense(128, activation='relu'),
+            Dense(output_shape, activation='sigmoid')
+        ])
+        
+        model.compile(optimizer='adam',
+                      loss='binary_crossentropy',
+                      metrics=['accuracy', tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
+        return model
+
+    def train_predict(self):
+        """Train model and make predictions"""
+        # Prepare data
+        X_train, X_test, y_train, y_test, pattern_times = self.prepare_data()
+        print(f"Data prepared: {X_train.shape[0]} training samples, {X_test.shape[0]} test samples")
+        
+        # Build model
+        model = self.build_model(X_train.shape[1:], y_train.shape[1])
+        model.summary()
+        
+        # Train model
+        early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+        history = model.fit(
+            X_train, y_train,
+            epochs=30,
+            batch_size=64,
+            validation_split=0.1,
+            callbacks=[early_stop],
+            verbose=1
+        )
+        
+        # Evaluate model
+        test_loss, test_acc, test_precision, test_recall = model.evaluate(X_test, y_test, verbose=0)
+        print(f"\nTest Accuracy: {test_acc:.4f}, Precision: {test_precision:.4f}, Recall: {test_recall:.4f}")
+        
+        # Make predictions
+        y_pred = model.predict(X_test)
+        y_pred_binary = (y_pred > 0.5).astype(int)
+        
+        # Calculate F1 score for each pattern
+        pattern_metrics = {}
+        for i, ptype in enumerate(self.pattern_types):
+            precision = precision_score(y_test[:, i], y_pred_binary[:, i])
+            recall = recall_score(y_test[:, i], y_pred_binary[:, i])
+            f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+            pattern_metrics[ptype] = {'precision': precision, 'recall': recall, 'f1': f1}
+        
+        return model, pattern_metrics, pattern_times, history, y_test, y_pred_binary
+
+
+def get_intraday_5min_data_chunk(ticker: str, start_date: str, end_date: str) -> Optional[pd.DataFrame]:
+    """
+    Fetch 5-minute intraday data for a specific date range (single chunk)
+    Returns None on error to allow continuation
+    """
+    headers = {"X-API-KEY": API_KEY}
+    url = (
+        f"https://api.financialdatasets.ai/prices/?ticker={ticker}"
+        f"&interval=minute&interval_multiplier=5"
+        f"&start_date={start_date}&end_date={end_date}"
+    )
+    
+    try:
+        print(f"Requesting {start_date} to {end_date}...")
+        response = requests.get(url, headers=headers, timeout=30)
+        
+        if response.status_code != 200:
+            print(f"⚠️ Error for {start_date}-{end_date}: {response.status_code} - {response.text}")
+            return None
+        
+        data = response.json()
+        parsed = PriceResponse(**data)
+        
+        df = pd.DataFrame([p.dict() for p in parsed.prices])
+        if not df.empty:
+            # Convert to Eastern Time
+            df["time"] = pd.to_datetime(df["time"]).dt.tz_convert('US/Eastern')
+            df.set_index("time", inplace=True)
+            df.sort_index(inplace=True)
+            print(f"✅ Retrieved {len(df)} records for {start_date} to {end_date}")
+            return df
+            
+        print(f"⚠️ No data for {start_date}-{end_date}")
+        return None
+        
+    except Exception as e:
+        print(f"⚠️ Exception for {start_date}-{end_date}: {str(e)}")
+        return None
+
+def get_intraday_5min_data(ticker: str, start_date: str, end_date: str) -> pd.DataFrame:
+    """
+    Fetch 5-minute intraday data with monthly chunking and retries
+    """
+    # Convert to datetime objects
+    start = datetime.strptime(start_date, "%Y-%m-%d")
+    end = datetime.strptime(end_date, "%Y-%m-%d")
+    
+    # Generate monthly chunks
+    chunks = []
+    current = start
+    while current <= end:
+        chunk_end = min(current + timedelta(days=30), end)
+        chunks.append((current.strftime("%Y-%m-%d"), chunk_end.strftime("%Y-%m-%d")))
+        current = chunk_end + timedelta(days=1)
+    
+    all_data = []
+    for i, (chunk_start, chunk_end) in enumerate(chunks):
+        retry = 0
+        while retry < 3:  # Max 3 retries
+            df_chunk = get_intraday_5min_data_chunk(ticker, chunk_start, chunk_end)
+            if df_chunk is not None:
+                all_data.append(df_chunk)
+                break
+            retry += 1
+            time.sleep(2 ** retry)  # Exponential backoff
+        else:
+            print(f"🚨 Failed to get data for {chunk_start} to {chunk_end} after 3 attempts")
+        
+        # Add delay between chunks to avoid rate limiting
+        if i < len(chunks) - 1:
+            time.sleep(1)
+    
+    if not all_data:
+        return pd.DataFrame()
+    
+    return pd.concat(all_data).sort_index()
+
+def plot_candlestick_pattern(df, pattern, before=20, after=20):
+    """
+    Plot candlestick chart with pattern annotations
+    """
+    # Get pattern boundaries
+    start_idx = max(0, df.index.get_loc(pattern['start']) - before)
+    end_idx = min(len(df), df.index.get_loc(pattern['end']) + after)
+    plot_df = df.iloc[start_idx:end_idx].copy()
+    
+    # Convert index to timezone-naive DatetimeIndex
+    plot_df.index = pd.to_datetime(plot_df.index).tz_localize(None)
+    
+    # Create style
+    mc = mpf.make_marketcolors(up='g', down='r')
+    s = mpf.make_mpf_style(marketcolors=mc)
+    
+    # Create annotations
+    apds = []
+    if pattern['type'] == 'Head and Shoulders':
+        # Add markers for shoulders and head
+        apds.append(mpf.make_addplot(plot_df['peak'], type='scatter', markersize=100, marker='^', color='blue'))
+        # Add neckline
+        apds.append(mpf.make_addplot([pattern['neckline']]*len(plot_df), color='purple', linestyle='--'))
+    
+    # Create plot
+    fig, axes = mpf.plot(
+        plot_df,
+        type='candle',
+        style=s,
+        title=f"{pattern['type']} Pattern (Confidence: {pattern.get('confidence', 0.5)*100:.1f}%)",
+        ylabel='Price',
+        addplot=apds,
+        figsize=(14, 7),
+        returnfig=True
+    )
+    
+    # Format x-axis
+    axes[0].xaxis.set_major_formatter(DateFormatter('%m-%d %H:%M'))
+    plt.show()
+
+def run_analysis(ticker="AAPL", start_date="2025-01-02", end_date="2025-06-20", force_fetch=False):
+    """
+    Main analysis workflow: Fetch data, detect patterns, and run predictions
+    """
+    # Filename for cached data
+    filename = f"{ticker}_5min_{start_date.replace('-','')}_{end_date.replace('-','')}.csv"
+    
+    # Load or fetch data
+    if os.path.exists(filename) and not force_fetch:
+        print(f"Loading data from {filename}")
+        df = pd.read_csv(filename, parse_dates=['time'])
+        
+        # Handle timezone-aware strings properly
+        try:
+            df['time'] = pd.to_datetime(df['time'], utc=True).dt.tz_convert(None)
+        except ValueError:
+            df['time'] = pd.to_datetime(df['time'])
+        
+        df.set_index('time', inplace=True)
+    else:
+        print(f"Fetching data for {ticker} from {start_date} to {end_date}")
+        df = get_intraday_5min_data(ticker, start_date, end_date)
+        if df.empty:
+            print("❌ No data retrieved")
+            return
+        
+        # Convert index to timezone-naive before saving
+        df.index = df.index.tz_localize(None)
+        df.to_csv(filename)
+        print(f"Data saved to {filename}")
+    
+    # Initialize pattern detector
+    detector = PatternDetector(df, window=12)
+    
+    # Detect all patterns
+    patterns = detector.detect_all()
+    
+    # Print results
+    print(f"\nDetected {len(patterns)} patterns:")
+    pattern_counts = {}
+    for pattern in patterns:
+        ptype = pattern['type']
+        pattern_counts[ptype] = pattern_counts.get(ptype, 0) + 1
+        print(f"- {ptype} from {pattern['start']} to {pattern['end']} (Confidence: {pattern.get('confidence', 0.5)*100:.1f}%)")
+    
+    print("\nPattern Counts:")
+    for ptype, count in pattern_counts.items():
+        print(f"{ptype}: {count}")
+    
+    # Plot sample patterns
+    if patterns:
+        print("\nPlotting sample patterns...")
+        sample_patterns = np.random.choice(patterns, size=min(5, len(patterns)), replace=False)
+        for pattern in sample_patterns:
+            plot_candlestick_pattern(df, pattern)
+    else:
+        print("\nNo patterns detected to plot")
+    
+    # Pattern prediction with ML
+    if patterns:
+        top_patterns = [ptype for ptype, count in sorted(pattern_counts.items(), key=lambda x: x[1], reverse=True)[:5]]
+        print(f"\nTraining ML model to predict top patterns: {', '.join(top_patterns)}")
+        
+        predictor = PatternPredictor(df, top_patterns)
+        model, metrics, pattern_times, history, y_test, y_pred = predictor.train_predict()
+        
+        # Print metrics
+        print("\nPattern Prediction Metrics:")
+        for ptype, scores in metrics.items():
+            print(f"{ptype}: F1={scores['f1']:.3f}, Precision={scores['precision']:.3f}, Recall={scores['recall']:.3f}")
+        
+        # Plot training history
+        plt.figure(figsize=(12, 4))
+        plt.subplot(121)
+        plt.plot(history.history['loss'], label='Train Loss')
+        plt.plot(history.history['val_loss'], label='Validation Loss')
+        plt.title('Loss Evolution')
+        plt.legend()
+        
+        plt.subplot(122)
+        plt.plot(history.history['accuracy'], label='Train Accuracy')
+        plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+        plt.title('Accuracy Evolution')
+        plt.legend()
+        plt.show()
+        
+        # Compare actual vs predicted patterns
+        plt.figure(figsize=(14, 8))
+        for i, ptype in enumerate(top_patterns):
+            plt.plot(y_test[:, i], label=f'Actual {ptype}')
+            plt.plot(y_pred[:, i], label=f'Predicted {ptype}', linestyle='--')
+        plt.title('Actual vs Predicted Patterns')
+        plt.xlabel('Time Step')
+        plt.ylabel('Pattern Presence')
+        plt.legend()
+        plt.show()
+    else:
+        print("\nNo patterns detected for ML training")
+def real_time_monitoring(ticker="AAPL", interval_minutes=5):
+    """
+    Real-time monitoring of Forex patterns
+    """
+    print(f"\nStarting real-time monitoring for {ticker}...")
+    print("Press Ctrl+C to stop monitoring\n")
+    
+    # Initialize variables
+    last_update = datetime.utcnow() - timedelta(minutes=interval_minutes)
+    timezone = pytz.timezone('US/Eastern')
+    df = pd.DataFrame()
+    
+    try:
+        while True:
+            current_time = datetime.utcnow()
+            
+            # Check if it's time for a new update
+            if (current_time - last_update).seconds >= interval_minutes * 60:
+                # Format time range
+                end_time = current_time.strftime("%Y-%m-%dT%H:%M:%S")
+                start_time = (current_time - timedelta(minutes=interval_minutes * 2)).strftime("%Y-%m-%dT%H:%M:%S")
+                
+                # Fetch latest data
+                print(f"\nFetching new data from {start_time} to {end_time}")
+                chunk = get_intraday_5min_data_chunk(ticker, start_time, end_time)
+                
+                if chunk is not None and not chunk.empty:
+                    # Append new data
+                    df = pd.concat([df, chunk]).drop_duplicates().sort_index()
+                    df = df[~df.index.duplicated(keep='last')]
+                    
+                    # Keep only last 24 hours of data
+                    cutoff = df.index.max() - timedelta(hours=24)
+                    df = df[df.index > cutoff]
+                    
+                    # Initialize pattern detector
+                    detector = PatternDetector(df, window=8)
+                    
+                    # Detect patterns in the latest data
+                    patterns = detector.detect_all()
+                    
+                    # Filter patterns detected in the last interval
+                    recent_patterns = [
+                        p for p in patterns 
+                        if p['end'] > df.index.max() - timedelta(minutes=interval_minutes * 2)
+                    ]
+                    
+                    # Process new patterns
+                    if recent_patterns:
+                        print(f"\n🔔 Detected {len(recent_patterns)} new pattern(s):")
+                        for pattern in recent_patterns:
+                            print(f"- {pattern['type']} from {pattern['start']} to {pattern['end']} "
+                                  f"(Confidence: {pattern.get('confidence', 0.5)*100:.1f}%)")
+                            
+                            # Visualize pattern
+                            plot_candlestick_pattern(df, pattern, before=20, after=10)
+                    else:
+                        print("No new patterns detected")
+                    
+                    last_update = current_time
+                else:
+                    print("No new data received")
+                
+                # Wait before next check
+                time.sleep(interval_minutes * 30)  # Check half-way through next interval
+            else:
+                # Sleep briefly before checking again
+                time.sleep(10)
+                
+    except KeyboardInterrupt:
+        print("\nMonitoring stopped by user")
+
+def main():
+    """
+    Main entry point with user options
+    """
+    import argparse
+    parser = argparse.ArgumentParser(description="Forex Pattern Recognition System")
+    parser.add_argument('--ticker', default="AAPL", help="Ticker symbol (default: AAPL)")
+    parser.add_argument('--start', default="2025-01-02", help="Start date (YYYY-MM-DD)")
+    parser.add_argument('--end', default="2025-06-20", help="End date (YYYY-MM-DD)")
+    parser.add_argument('--realtime', action='store_true', help="Enable real-time monitoring")
+    parser.add_argument('--interval', type=int, default=5, 
+                        help="Interval in minutes for real-time checks (default: 5)")
+    parser.add_argument('--force-fetch', action='store_true', 
+                        help="Force fetching new data instead of using cached")
+    
+    args = parser.parse_args()
+    
+    if args.realtime:
+        real_time_monitoring(args.ticker, args.interval)
+    else:
+        run_analysis(
+            ticker=args.ticker,
+            start_date=args.start,
+            end_date=args.end,
+            force_fetch=args.force_fetch
+        )
+
+if __name__ == "__main__":
+    main()
+
+
+give the full code.
+
