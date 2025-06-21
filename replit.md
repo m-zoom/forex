@@ -94,7 +94,10 @@ Changelog:
 - June 21, 2025. Removed web applications per user preference
 - June 21, 2025. Fixed logger initialization and core functionality testing
 - June 21, 2025. Fixed API validation unpacking error in validate_api_key method
-- June 21, 2025. Desktop application ready for local deployment with working API validation
+- June 21, 2025. Changed forex pairs to stock symbols (AAPL, MSFT, etc.) for API compatibility
+- June 21, 2025. Added Config.save() method to fix shutdown error
+- June 21, 2025. Removed chart emojis from GUI to eliminate font warnings
+- June 21, 2025. Desktop application fully functional on local computers
 ```
 
 ## User Preferences
