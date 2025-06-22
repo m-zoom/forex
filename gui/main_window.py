@@ -12,6 +12,9 @@ import os
 from .chart_frame import ChartFrame
 from .controls_frame import ControlsFrame
 from .pattern_frame import PatternFrame
+from .alert_system import AlertSystem
+from .preferences_dialog import PreferencesDialog
+from .analytics_dashboard import AnalyticsDashboard
 from data.forex_api import ForexAPI
 from data.data_processor import DataProcessor
 from models.pattern_detector import PatternDetector
@@ -32,6 +35,14 @@ class MainWindow:
         self.is_real_time = False
         self.real_time_thread = None
         self.current_symbol = "EUR/USD"
+        
+        # Initialize alert system
+        self.alert_system = AlertSystem(self)
+        self.alert_system.load_alert_history()
+        
+        # Initialize dialogs
+        self.preferences_dialog = None
+        self.analytics_dashboard = None
         
         self.setup_ui()
         self.setup_menu()
