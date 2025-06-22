@@ -1,0 +1,87 @@
+ python main.py
+2025-06-22 10:38:39.372735: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-22 10:38:40.579857: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+10:38:42 - INFO - ==================================================
+10:38:42 - INFO - Starting Forex Pattern Recognition System v1.0.0
+10:38:42 - INFO - ==================================================
+10:38:42 - INFO - Configuration loaded successfully
+10:38:42 - INFO - Desktop Tkinter application starting...
+10:38:42 - INFO - Main UI setup completed
+10:38:42 - INFO - GUI initialized successfully
+10:38:42 - INFO - Application ready for use
+10:38:43 - INFO - Status: Checking API connection...
+10:38:43 - INFO - Validating API key
+10:38:43 - INFO - Requesting AAPL data from 2025-06-21 to 2025-06-21...
+10:38:46 - ERROR - HTTP Error 404: {"error":"No data found","message":"No prices found for AAPL"}
+10:38:47 - ERROR - HTTP Error 404: {"error":"No data found","message":"No prices found for AAPL"}
+10:38:48 - ERROR - HTTP Error 404: {"error":"No data found","message":"No prices found for AAPL"}
+10:38:48 - WARNING - No response for 2025-06-21-2025-06-21
+10:38:48 - ERROR - API key validation failed - no data returned
+10:38:48 - INFO - Status: API connection failed: API key validation failed - no data returned
+10:39:02 - INFO - Status: Fetching compact data for MSFT (5min)...
+10:39:02 - INFO - Fetching MSFT data with 5min interval for 30 days
+10:39:02 - INFO - Requesting MSFT data from 2025-05-23 to 2025-06-22...
+10:39:04 - INFO - Retrieved 1394 records for 2025-05-23 to 2025-06-22
+10:39:04 - INFO - Successfully fetched 1394 records for MSFT
+10:39:04 - INFO - Data processing completed. Shape: (1394, 34)
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\_arg_validators.py:84: UserWarning: 
+
+ =================================================================
+
+   WARNING: YOU ARE PLOTTING SO MUCH DATA THAT IT MAY NOT BE
+            POSSIBLE TO SEE DETAILS (Candles, Ohlc-Bars, Etc.)
+   For more information see:
+   - https://github.com/matplotlib/mplfinance/wiki/Plotting-Too-Much-Data
+
+   TO SILENCE THIS WARNING, set `type='line'` in `mpf.plot()`
+   OR set kwarg `warn_too_much_data=N` where N is an integer
+   LARGER than the number of data points you want to plot.
+
+ ================================================================
+  warnings.warn('\n\n ================================================================= '+
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\plotting.py:476: UserWarning: Starting a Matplotlib GUI outside of the main thread will likely fail. 
+  fig = plt.figure()
+10:39:06 - INFO - Chart updated successfully with 1394 data points
+10:39:06 - INFO - Status: Data loaded: 1394 points for MSFT (2025-05-23 04:00 to 2025-06-05 18:10)
+10:39:08 - INFO - Status: Analyzing data for patterns...
+10:39:10 - INFO - Detected 29 patterns
+10:39:11 - ERROR - Error drawing pattern overlay: x and y must have same first dimension, but have shapes (8,) and (4,)
+10:39:11 - INFO - Added 29 pattern overlays to chart
+10:39:12 - INFO - Status: Pattern detection complete: 29 patterns found (28 high confidence)
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+10:39:22 - INFO - Application shutdown requested
+10:39:24 - INFO - Application closing gracefully
+10:39:24 - INFO - Application shutdown completed
+invalid command name "1945804978240update_info_display"

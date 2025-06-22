@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import os
-from .chart_fixes import create_thread_safe_canvas, configure_matplotlib_threading
+# Threading fixes for matplotlib integrated directly
 
 class ChartFrame(ttk.Frame):
     def __init__(self, parent, main_window):
@@ -125,10 +125,17 @@ class ChartFrame(ttk.Frame):
         plt.tight_layout()
         
         self.canvas = FigureCanvasTkAgg(fig, self.chart_container)
+        
+        # Disable mouse events to prevent threading issues
+        try:
+            self.canvas.callbacks.callbacks.clear()
+            # Disable coordinate display that causes threading errors
+            self.canvas.format_coord = lambda x, y: ""
+        except:
+            pass
+            
         self.canvas.draw()
         self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
-        
-        # Skip navigation toolbar to prevent threading issues
         
     def update_chart(self, data):
         """Update chart with new data"""
@@ -293,12 +300,18 @@ class ChartFrame(ttk.Frame):
             
             plt.tight_layout()
             
-            # Add to tkinter
+            # Add to tkinter with threading safety
             self.canvas = FigureCanvasTkAgg(fig, self.chart_container)
+            
+            # Disable mouse events to prevent threading issues
+            try:
+                self.canvas.callbacks.callbacks.clear()
+                self.canvas.format_coord = lambda x, y: ""
+            except:
+                pass
+                
             self.canvas.draw()
             self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
-            
-            # Skip navigation toolbar to prevent threading issues
             
             self.main_ax = ax
             
@@ -351,10 +364,15 @@ class ChartFrame(ttk.Frame):
             )
             
             self.canvas = FigureCanvasTkAgg(fig, self.chart_container)
+            
+            # Disable mouse events to prevent threading issues
+            try:
+                self.canvas.callbacks.callbacks.clear()
+            except:
+                pass
+                
             self.canvas.draw()
             self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
-            
-            # Skip navigation toolbar to prevent threading issues
             
             if isinstance(axes, list):
                 self.main_ax = axes[0]
