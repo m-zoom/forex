@@ -256,9 +256,14 @@ class FinancialDataAPI:
             return False, message
         
         try:
-            # Try to fetch a small amount of data for AAPL
-            test_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-            df = self.get_data_chunk("AAPL", test_date, test_date, "daily")
+            # Try to fetch recent trading data (last 5 days to account for weekends)
+            end_date = datetime.now()
+            start_date = end_date - timedelta(days=5)
+            
+            start_str = start_date.strftime("%Y-%m-%d")
+            end_str = end_date.strftime("%Y-%m-%d")
+            
+            df = self.get_data_chunk("AAPL", start_str, end_str, "5min")
             
             if df is not None and not df.empty:
                 message = "API key validation successful"

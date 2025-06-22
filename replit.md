@@ -101,6 +101,7 @@ Changelog:
 - June 22, 2025. Resolved matplotlib threading issues that caused mouse event errors
 - June 22, 2025. Added thread-safe chart rendering to prevent "main thread not in main loop" errors
 - June 22, 2025. Fixed pattern overlay dimension mismatch errors
+- June 22, 2025. Fixed weekend API validation issue - now uses 5-day range instead of single day
 - June 22, 2025. Desktop application fully functional on local computers with 29+ patterns detected
 ```
 
