@@ -14,7 +14,8 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import os
-# Threading fixes for matplotlib integrated directly
+import threading
+from .chart_fixes import disable_mouse_events, configure_matplotlib_threading, create_thread_safe_canvas
 
 class ChartFrame(ttk.Frame):
     def __init__(self, parent, main_window):
@@ -126,13 +127,23 @@ class ChartFrame(ttk.Frame):
         
         self.canvas = FigureCanvasTkAgg(fig, self.chart_container)
         
-        # Disable mouse events to prevent threading issues
+        # Simple but effective mouse event disabling to prevent threading issues
         try:
+            # Clear all event callbacks that cause threading problems
             self.canvas.callbacks.callbacks.clear()
-            # Disable coordinate display that causes threading errors
-            self.canvas.format_coord = lambda x, y: ""
-        except:
-            pass
+            
+            # Disable the coordinate display that triggers the main threading error
+            self.canvas.get_tk_widget().unbind('<Motion>')
+            self.canvas.get_tk_widget().unbind('<Enter>')
+            self.canvas.get_tk_widget().unbind('<Leave>')
+            
+            # Override the mouse motion event at the widget level
+            def dummy_motion(event):
+                pass
+            self.canvas.get_tk_widget().bind('<Motion>', dummy_motion)
+            
+        except Exception as e:
+            print(f"Threading safety setup: {e}")
             
         self.canvas.draw()
         self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
@@ -300,15 +311,26 @@ class ChartFrame(ttk.Frame):
             
             plt.tight_layout()
             
-            # Add to tkinter with threading safety
+            # Add to tkinter with comprehensive threading safety
             self.canvas = FigureCanvasTkAgg(fig, self.chart_container)
             
-            # Disable mouse events to prevent threading issues
+            # Simple but effective mouse event disabling to prevent threading issues
             try:
+                # Clear all event callbacks that cause threading problems
                 self.canvas.callbacks.callbacks.clear()
-                self.canvas.format_coord = lambda x, y: ""
-            except:
-                pass
+                
+                # Disable the coordinate display that triggers the main threading error
+                self.canvas.get_tk_widget().unbind('<Motion>')
+                self.canvas.get_tk_widget().unbind('<Enter>')
+                self.canvas.get_tk_widget().unbind('<Leave>')
+                
+                # Override the mouse motion event at the widget level
+                def dummy_motion(event):
+                    pass
+                self.canvas.get_tk_widget().bind('<Motion>', dummy_motion)
+                
+            except Exception as e:
+                print(f"Threading safety setup: {e}")
                 
             self.canvas.draw()
             self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
@@ -365,11 +387,23 @@ class ChartFrame(ttk.Frame):
             
             self.canvas = FigureCanvasTkAgg(fig, self.chart_container)
             
-            # Disable mouse events to prevent threading issues
+            # Simple but effective mouse event disabling to prevent threading issues
             try:
+                # Clear all event callbacks that cause threading problems
                 self.canvas.callbacks.callbacks.clear()
-            except:
-                pass
+                
+                # Disable the coordinate display that triggers the main threading error
+                self.canvas.get_tk_widget().unbind('<Motion>')
+                self.canvas.get_tk_widget().unbind('<Enter>')
+                self.canvas.get_tk_widget().unbind('<Leave>')
+                
+                # Override the mouse motion event at the widget level
+                def dummy_motion(event):
+                    pass
+                self.canvas.get_tk_widget().bind('<Motion>', dummy_motion)
+                
+            except Exception as e:
+                print(f"Threading safety setup: {e}")
                 
             self.canvas.draw()
             self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
