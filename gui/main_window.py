@@ -139,6 +139,11 @@ class MainWindow:
         tools_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Tools", menu=tools_menu)
         tools_menu.add_command(label="Pattern Detection Settings", command=self.show_pattern_settings)
+        tools_menu.add_command(label="Alert Preferences", command=self.show_preferences)
+        tools_menu.add_separator()
+        tools_menu.add_command(label="Analytics Dashboard", command=self.show_analytics_dashboard)
+        tools_menu.add_command(label="Pattern History", command=self.show_pattern_history)
+        tools_menu.add_separator()
         tools_menu.add_command(label="Model Training", command=self.show_training_dialog)
         tools_menu.add_separator()
         tools_menu.add_command(label="System Information", command=self.show_system_info)
@@ -256,6 +261,10 @@ class MainWindow:
             
             # Update chart with pattern overlays
             self.chart_frame.add_pattern_overlays(self.detected_patterns)
+            
+            # Create intelligent alerts for detected patterns
+            if self.detected_patterns:
+                self.create_pattern_alerts(self.detected_patterns)
             
             # Update status
             pattern_count = len(self.detected_patterns)
@@ -1021,9 +1030,87 @@ Built with ❤️ for the trading community
                 self.logger.info("Stopping real-time monitoring before exit...")
                 self.stop_real_time()
             
+            # Save alert system data
+            if hasattr(self, 'alert_system'):
+                self.alert_system.save_alert_history()
+                self.alert_system.save_settings()
+            
             # Save any unsaved configuration
             self.config.save()
             self.logger.info("Application closing gracefully")
             
         except Exception as e:
             self.logger.error(f"Error during application shutdown: {str(e)}")
+            
+    def show_preferences(self):
+        """Show alert preferences dialog"""
+        if not self.preferences_dialog:
+            self.preferences_dialog = PreferencesDialog(self.root, self.alert_system)
+        self.preferences_dialog.show()
+        
+    def show_analytics_dashboard(self):
+        """Show analytics dashboard"""
+        if not self.analytics_dashboard:
+            self.analytics_dashboard = AnalyticsDashboard(self.root, self.alert_system)
+        self.analytics_dashboard.show()
+        
+    def show_pattern_history(self):
+        """Show pattern history in analytics dashboard"""
+        self.show_analytics_dashboard()
+        
+    def show_performance_report(self):
+        """Show performance analytics"""
+        self.show_analytics_dashboard()
+        
+    def export_analytics_data(self):
+        """Export analytics data"""
+        try:
+            if not self.analytics_dashboard:
+                self.analytics_dashboard = AnalyticsDashboard(self.root, self.alert_system)
+            self.analytics_dashboard.export_pattern_history()
+        except Exception as e:
+            messagebox.showerror("Export Error", f"Failed to export analytics: {str(e)}")
+            
+    def create_pattern_alerts(self, patterns):
+        """Create intelligent alerts for detected patterns"""
+        for pattern in patterns:
+            # Determine suggested action based on pattern type and confidence
+            suggested_action = self.get_suggested_action(pattern)
+            
+            # Create alert through the alert system
+            self.alert_system.create_pattern_alert(
+                pattern_type=pattern.get('type', 'unknown'),
+                symbol=self.current_symbol,
+                confidence=pattern.get('confidence', 0),
+                suggested_action=suggested_action,
+                pattern_data=pattern
+            )
+            
+    def get_suggested_action(self, pattern):
+        """Get intelligent trading suggestion based on pattern"""
+        pattern_type = pattern.get('type', '').lower()
+        confidence = pattern.get('confidence', 0)
+        
+        # High confidence suggestions
+        if confidence >= 85:
+            if 'double_bottom' in pattern_type or 'head_shoulders_inverted' in pattern_type:
+                return "Strong BUY signal - Consider long position with confirmation"
+            elif 'double_top' in pattern_type or 'head_shoulders' in pattern_type:
+                return "Strong SELL signal - Consider short position with confirmation"
+            elif 'triangle' in pattern_type:
+                return "Breakout pending - Wait for direction confirmation"
+            else:
+                return "High confidence pattern detected - Analyze for trading opportunity"
+                
+        # Medium confidence suggestions
+        elif confidence >= 70:
+            if 'support' in pattern_type:
+                return "Watch for bounce - Potential buy opportunity"
+            elif 'resistance' in pattern_type:
+                return "Watch for rejection - Potential sell opportunity"
+            else:
+                return "Monitor closely - Wait for confirmation signals"
+                
+        # Lower confidence
+        else:
+            return "Low confidence - Use as additional confirmation only"
