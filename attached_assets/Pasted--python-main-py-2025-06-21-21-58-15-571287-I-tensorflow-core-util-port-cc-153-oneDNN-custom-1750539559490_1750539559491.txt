@@ -1,0 +1,119 @@
+ python main.py      
+2025-06-21 21:58:15.571287: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-21 21:58:16.741555: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+21:58:18 - INFO - ==================================================
+21:58:18 - INFO - Starting Forex Pattern Recognition System v1.0.0
+21:58:18 - INFO - ==================================================
+21:58:18 - INFO - Configuration loaded successfully
+21:58:18 - INFO - Desktop Tkinter application starting...
+21:58:19 - INFO - Main UI setup completed
+21:58:19 - INFO - GUI initialized successfully
+21:58:19 - INFO - Application ready for use
+21:58:19 - INFO - Status: Checking API connection...
+21:58:19 - INFO - Validating API key
+21:58:19 - INFO - Requesting AAPL data from 2025-06-20 to 2025-06-20...
+21:58:22 - INFO - Retrieved 1 records for 2025-06-20 to 2025-06-20
+21:58:22 - INFO - API key validation successful
+21:58:22 - INFO - Status: API connection successful
+21:58:30 - INFO - Status: Fetching compact data for AAPL (5min)...
+21:58:30 - INFO - Fetching AAPL data with 5min interval for 30 days
+21:58:30 - INFO - Requesting AAPL data from 2025-05-22 to 2025-06-21...
+21:58:32 - INFO - Retrieved 1188 records for 2025-05-22 to 2025-06-21
+21:58:32 - INFO - Successfully fetched 1188 records for AAPL
+21:58:32 - INFO - Data processing completed. Shape: (1188, 34)
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\_arg_validators.py:84: UserWarning: 
+
+ ================================================================= 
+
+   WARNING: YOU ARE PLOTTING SO MUCH DATA THAT IT MAY NOT BE
+            POSSIBLE TO SEE DETAILS (Candles, Ohlc-Bars, Etc.)
+   For more information see:
+   - https://github.com/matplotlib/mplfinance/wiki/Plotting-Too-Much-Data
+
+   TO SILENCE THIS WARNING, set `type='line'` in `mpf.plot()`
+   OR set kwarg `warn_too_much_data=N` where N is an integer
+   LARGER than the number of data points you want to plot.
+
+ ================================================================
+  warnings.warn('\n\n ================================================================= '+
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\plotting.py:476: UserWarning: Starting a Matplotlib GUI outside of the main thread will likely fail.
+  fig = plt.figure()
+21:58:33 - INFO - Chart updated successfully with 1188 data points
+21:58:34 - INFO - Status: Data loaded: 1188 points for AAPL (2025-05-22 04:00 to 2025-06-02 08:40)
+21:58:35 - INFO - Status: Analyzing data for patterns...
+21:58:36 - INFO - Detected 90 patterns
+21:58:37 - INFO - Added 90 pattern overlays to chart
+21:58:38 - INFO - Status: Pattern detection complete: 90 patterns found (89 high confidence)
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\main.py", line 147, in <module>
+    main()
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\main.py", line 125, in main
+    root.mainloop()
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1504, in mainloop
+    self.tk.mainloop(n)
+KeyboardInterrupt
+Exception ignored in atexit callback: <bound method Gcf.destroy_all of <class 'matplotlib._pylab_helpers.Gcf'>>
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\_pylab_helpers.py", line 81, in destroy_all
+    manager.destroy()
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 590, in destroy
+    self._window_dpi.trace_remove('write', self._window_dpi_cbname)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 471, in trace_remove
+    self._tk.call('trace', 'remove', 'variable',
+RuntimeError: main thread is not in main loop
+(venv311) PS C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex> 

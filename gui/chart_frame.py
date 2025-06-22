@@ -4,8 +4,10 @@ Chart visualization frame using matplotlib
 
 import tkinter as tk
 from tkinter import ttk, messagebox
+import matplotlib
+matplotlib.use('TkAgg')  # Use TkAgg backend for proper Tkinter integration
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.dates as mdates
 import mplfinance as mpf
 import pandas as pd
@@ -125,9 +127,7 @@ class ChartFrame(ttk.Frame):
         self.canvas.draw()
         self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
         
-        # Add navigation toolbar
-        self.toolbar = NavigationToolbar2Tk(self.canvas, self.chart_container)
-        self.toolbar.update()
+        # Skip navigation toolbar to prevent threading issues
         
     def update_chart(self, data):
         """Update chart with new data"""
@@ -234,9 +234,8 @@ class ChartFrame(ttk.Frame):
             self.canvas.draw()
             self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
             
-            # Navigation toolbar
-            self.toolbar = NavigationToolbar2Tk(self.canvas, self.chart_container)
-            self.toolbar.update()
+            # Skip navigation toolbar to prevent threading issues
+            # Users can zoom/pan using mouse wheel and drag
             
             # Store axes for pattern overlays
             if isinstance(axes, list):
@@ -298,8 +297,7 @@ class ChartFrame(ttk.Frame):
             self.canvas.draw()
             self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
             
-            self.toolbar = NavigationToolbar2Tk(self.canvas, self.chart_container)
-            self.toolbar.update()
+            # Skip navigation toolbar to prevent threading issues
             
             self.main_ax = ax
             
@@ -355,8 +353,7 @@ class ChartFrame(ttk.Frame):
             self.canvas.draw()
             self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
             
-            self.toolbar = NavigationToolbar2Tk(self.canvas, self.chart_container)
-            self.toolbar.update()
+            # Skip navigation toolbar to prevent threading issues
             
             if isinstance(axes, list):
                 self.main_ax = axes[0]
