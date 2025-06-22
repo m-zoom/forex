@@ -98,6 +98,8 @@ Changelog:
 - June 21, 2025. Added Config.save() method to fix shutdown error
 - June 21, 2025. Removed chart emojis from GUI to eliminate font warnings
 - June 21, 2025. Fixed chart dimension mismatch error with data alignment and fallback charts
+- June 21, 2025. Resolved matplotlib threading issues that caused mouse event errors
+- June 21, 2025. Added thread-safe chart rendering to prevent "main thread not in main loop" errors
 - June 21, 2025. Desktop application fully functional on local computers
 ```
 

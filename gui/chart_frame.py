@@ -14,6 +14,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import os
+from .chart_fixes import create_thread_safe_canvas, configure_matplotlib_threading
 
 class ChartFrame(ttk.Frame):
     def __init__(self, parent, main_window):
