@@ -796,7 +796,7 @@ Processor: {platform.processor()}
 Python Version: {sys.version}
 
 API Configuration:
-Alpha Vantage API: {'Configured' if self.config.get('alpha_vantage_api_key') != 'your_api_key_here' else 'Not Configured'}
+Alpha Vantage API: {'Configured' if self.config.get('api', 'alpha_vantage_api_key') != 'your_api_key_here' else 'Not Configured'}
 
 Current Session:
 Current Symbol: {getattr(self, 'current_symbol', 'None')}

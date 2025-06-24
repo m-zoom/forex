@@ -1,0 +1,107 @@
+
+2025-06-24 12:46:08.631176: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-24 12:46:09.720798: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+12:46:11 - INFO - ==================================================
+12:46:11 - INFO - Starting Forex Pattern Recognition System v1.0.0
+12:46:11 - INFO - ==================================================
+12:46:11 - INFO - Configuration loaded successfully
+12:46:11 - INFO - Desktop Tkinter application starting...
+12:46:11 - INFO - Main UI setup completed
+12:46:11 - INFO - GUI initialized successfully
+12:46:11 - INFO - Application ready for use
+12:46:12 - INFO - Status: Checking API connection...
+12:46:12 - INFO - Validating API key
+12:46:12 - INFO - Requesting AAPL data from 2025-06-19 to 2025-06-24...
+12:46:13 - INFO - Retrieved 425 records for 2025-06-19 to 2025-06-24
+12:46:13 - INFO - API key validation successful
+12:46:13 - INFO - Status: API connection successful
+12:47:40 - INFO - Status: Fetching full data for AAPL (5min)...
+12:47:40 - INFO - Fetching AAPL data with 5min interval for 150 days
+12:47:40 - INFO - Requesting AAPL data from 2025-01-25 to 2025-02-24...
+12:47:41 - INFO - Retrieved 1099 records for 2025-01-25 to 2025-02-24
+12:47:42 - INFO - Requesting AAPL data from 2025-02-25 to 2025-03-27...
+12:47:44 - INFO - Retrieved 1245 records for 2025-02-25 to 2025-03-27
+12:47:45 - INFO - Requesting AAPL data from 2025-03-28 to 2025-04-27...
+12:47:46 - INFO - Retrieved 1158 records for 2025-03-28 to 2025-04-27
+12:47:47 - INFO - Requesting AAPL data from 2025-04-28 to 2025-05-28...
+12:47:49 - INFO - Retrieved 1178 records for 2025-04-28 to 2025-05-28
+12:47:50 - INFO - Requesting AAPL data from 2025-05-29 to 2025-06-24...
+12:47:51 - INFO - Retrieved 1214 records for 2025-05-29 to 2025-06-24
+12:47:51 - INFO - Successfully fetched 5894 records for AAPL
+12:47:51 - INFO - Data processing completed. Shape: (5894, 34)
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\_arg_validators.py:84: UserWarning: 
+
+ =================================================================
+
+   WARNING: YOU ARE PLOTTING SO MUCH DATA THAT IT MAY NOT BE
+            POSSIBLE TO SEE DETAILS (Candles, Ohlc-Bars, Etc.)
+   For more information see:
+   - https://github.com/matplotlib/mplfinance/wiki/Plotting-Too-Much-Data
+
+   TO SILENCE THIS WARNING, set `type='line'` in `mpf.plot()`
+   OR set kwarg `warn_too_much_data=N` where N is an integer
+   LARGER than the number of data points you want to plot.
+
+ ================================================================
+  warnings.warn('\n\n ================================================================= '+
+C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\mplfinance\plotting.py:476: UserWarning: Starting a Matplotlib GUI outside of the main thread will likely fail.
+  fig = plt.figure()
+12:47:55 - INFO - Chart updated successfully with 5894 data points
+12:47:58 - INFO - Status: Data loaded: 5894 points for AAPL (2025-01-27 04:00 to 2025-06-06 11:00)
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+12:48:02 - INFO - Status: Analyzing data for patterns...
+12:48:09 - INFO - Detected 476 patterns
+12:48:15 - INFO - Added 476 pattern overlays to chart
+12:48:16 - INFO - Status: Pattern detection complete: 476 patterns found (476 high confidence)
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1967, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\gui\main_window.py", line 799, in show_system_info
+    Alpha Vantage API: {'Configured' if self.config.get('alpha_vantage_api_key') != 'your_api_key_here' else 'Not Configured'}
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Config.get() missing 1 required positional argument: 'key'
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\cbook.py", line 361, in process
+    func(*args, **kwargs)
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backend_bases.py", line 2954, in mouse_move
+    self.set_message(self._mouse_event_to_message(event))
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\venv311\Lib\site-packages\matplotlib\backends\_backend_tk.py", line 722, in set_message
+    self.message.set(s)
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 424, in set
+    return self._tk.globalsetvar(self._name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop

@@ -127,17 +127,21 @@ class ChartFrame(ttk.Frame):
         
         self.canvas = FigureCanvasTkAgg(fig, self.chart_container)
         
-        # Simple but effective mouse event disabling to prevent threading issues
+        # Enhanced mouse event disabling to completely prevent threading issues
+        from .chart_fixes import disable_mouse_events
+        disable_mouse_events(self.canvas)
+        
         try:
-            # Clear all event callbacks that cause threading problems
-            self.canvas.callbacks.callbacks.clear()
-            
-            # Disable the coordinate display that triggers the main threading error
-            self.canvas.get_tk_widget().unbind('<Motion>')
-            self.canvas.get_tk_widget().unbind('<Enter>')
-            self.canvas.get_tk_widget().unbind('<Leave>')
-            
-            # Override the mouse motion event at the widget level
+            # Additional safety measures for the toolbar
+            if hasattr(self.canvas, 'toolbar') and self.canvas.toolbar:
+                # Override problematic toolbar methods
+                def safe_mouse_move(event):
+                    pass
+                def safe_set_message(msg):
+                    pass
+                    
+                self.canvas.toolbar.mouse_move = safe_mouse_move
+                self.canvas.toolbar.set_message = safe_set_message
             def dummy_motion(event):
                 pass
             self.canvas.get_tk_widget().bind('<Motion>', dummy_motion)
