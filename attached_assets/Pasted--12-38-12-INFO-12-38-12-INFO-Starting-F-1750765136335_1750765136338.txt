@@ -1,0 +1,44 @@
+
+12:38:12 - INFO - ==================================================
+12:38:12 - INFO - Starting Forex Pattern Recognition System v1.0.0
+12:38:12 - INFO - ==================================================
+12:38:12 - INFO - Configuration loaded successfully
+12:38:12 - INFO - Desktop Tkinter application starting...
+12:38:13 - INFO - Main UI setup completed
+12:38:13 - INFO - GUI initialized successfully
+12:38:13 - INFO - Application ready for use
+12:38:13 - INFO - Status: Checking API connection...
+12:38:13 - INFO - Validating API key
+12:38:13 - INFO - Requesting AAPL data from 2025-06-19 to 2025-06-24...
+12:38:14 - INFO - Retrieved 423 records for 2025-06-19 to 2025-06-24
+12:38:14 - INFO - API key validation successful
+12:38:14 - INFO - Status: API connection successful
+12:38:31 - INFO - Starting advanced real-time monitoring system
+12:38:31 - INFO - Requesting AAPL data from 2025-06-23 to 2025-06-24...
+12:38:31 - INFO - Status: Advanced real-time monitoring started
+12:38:31 - INFO - Requesting MSFT data from 2025-06-23 to 2025-06-24...
+12:38:31 - INFO - Requesting TSLA data from 2025-06-23 to 2025-06-24...
+12:38:32 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:32 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:32 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:33 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:33 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:33 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:34 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:34 - WARNING - No response for 2025-06-23-2025-06-24
+12:38:34 - INFO - Requesting TSLA data from 2025-06-23 to 2025-06-24...
+12:38:34 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:34 - WARNING - No response for 2025-06-23-2025-06-24
+12:38:34 - INFO - Requesting AAPL data from 2025-06-23 to 2025-06-24...
+12:38:34 - ERROR - HTTP Error 400: {"error":"Invalid interval","message":"Must be one of {'year', 'minute', 'day', 'second', 'month', 'week'}"}
+12:38:34 - WARNING - No response for 2025-06-23-2025-06-24
+12:38:34 - INFO - Requesting MSFT data from 2025-06-23 to 2025-06-24...
+12:38:36 - INFO - Retrieved 2 records for 2025-06-23 to 2025-06-24
+12:38:36 - INFO - Retrieved 2 records for 2025-06-23 to 2025-06-24
+12:38:36 - INFO - Data processing completed. Shape: (1, 27)
+12:38:36 - INFO - Data processing completed. Shape: (1, 27)
+12:38:36 - INFO - Detected 0 patterns
+12:38:36 - INFO - Detected 0 patterns
+12:38:36 - INFO - Retrieved 2 records for 2025-06-23 to 2025-06-24
+12:38:36 - INFO - Data processing completed. Shape: (1, 27)
+12:38:36 - INFO - Detected 0 patterns

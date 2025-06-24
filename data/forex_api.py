@@ -77,15 +77,15 @@ class FinancialDataAPI:
         Fetch data for a specific date range (single chunk)
         Returns None on error to allow continuation
         """
-        # Convert interval format - Updated mapping for all supported intervals
+        # Convert interval format - API accepts: year, minute, day, second, month, week
         interval_mapping = {
             "1min": ("minute", 1),
             "5min": ("minute", 5),
             "15min": ("minute", 15),
             "30min": ("minute", 30),
             "60min": ("minute", 60),
-            "1h": ("hour", 1),
-            "4h": ("hour", 4),
+            "1h": ("minute", 60),  # 1 hour = 60 minutes
+            "4h": ("minute", 240), # 4 hours = 240 minutes
             "1d": ("day", 1),
             "daily": ("day", 1),
             "weekly": ("week", 1),
@@ -105,6 +105,8 @@ class FinancialDataAPI:
             'start_date': start_date,
             'end_date': end_date
         }
+        
+        self.logger.debug(f"API request params: {params}")
         
         try:
             self.logger.info(f"Requesting {ticker} data from {start_date} to {end_date}...")
@@ -145,15 +147,15 @@ class FinancialDataAPI:
             pandas.DataFrame: OHLCV data
         """
         
-        # Map requested intervals to supported API format - consistent with get_data_chunk
+        # Map requested intervals to supported API format - API accepts: year, minute, day, second, month, week
         interval_mapping = {
             "1min": ("minute", 1),
             "5min": ("minute", 5),
             "15min": ("minute", 15),
             "30min": ("minute", 30),
             "60min": ("minute", 60),
-            "1h": ("hour", 1),
-            "4h": ("hour", 4),
+            "1h": ("minute", 60),  # 1 hour = 60 minutes
+            "4h": ("minute", 240), # 4 hours = 240 minutes
             "1d": ("day", 1),
             "daily": ("day", 1),
             "weekly": ("week", 1),
