@@ -16,6 +16,7 @@ from .alert_system import AlertSystem
 from .preferences_dialog import PreferencesDialog
 from .analytics_dashboard import AnalyticsDashboard
 from data.forex_api import ForexAPI
+from models.advanced_realtime_monitor import AdvancedRealtimeMonitor, MonitoringConfig
 from data.data_processor import DataProcessor
 from models.pattern_detector import PatternDetector
 from utils.helpers import save_results, load_results
@@ -43,6 +44,11 @@ class MainWindow:
         # Initialize dialogs
         self.preferences_dialog = None
         self.analytics_dashboard = None
+        
+        # Advanced monitoring system
+        self.advanced_monitor = None
+        self.monitoring_symbols = ["AAPL", "MSFT", "TSLA"]  # Default symbols
+        self.monitoring_timeframes = ["1m", "5m", "15m"]  # Default timeframes
         
         self.setup_ui()
         self.setup_menu()
@@ -140,6 +146,9 @@ class MainWindow:
         menubar.add_cascade(label="Tools", menu=tools_menu)
         tools_menu.add_command(label="Pattern Detection Settings", command=self.show_pattern_settings)
         tools_menu.add_command(label="Alert Preferences", command=self.show_preferences)
+        tools_menu.add_separator()
+        tools_menu.add_command(label="Advanced Monitoring Setup", command=self.show_advanced_monitoring_setup)
+        tools_menu.add_command(label="Monitoring Status", command=self.show_monitoring_status)
         tools_menu.add_separator()
         tools_menu.add_command(label="Analytics Dashboard", command=self.show_analytics_dashboard)
         tools_menu.add_command(label="Pattern History", command=self.show_pattern_history)
@@ -1114,3 +1123,239 @@ Built with ❤️ for the trading community
         # Lower confidence
         else:
             return "Low confidence - Use as additional confirmation only"
+            
+    def show_advanced_monitoring_setup(self):
+        """Show advanced monitoring configuration dialog"""
+        setup_window = tk.Toplevel(self.root)
+        setup_window.title("Advanced Real-Time Monitoring Setup")
+        setup_window.geometry("600x500")
+        setup_window.transient(self.root)
+        setup_window.grab_set()
+        
+        # Center window
+        setup_window.update_idletasks()
+        x = (setup_window.winfo_screenwidth() // 2) - (setup_window.winfo_width() // 2)
+        y = (setup_window.winfo_screenheight() // 2) - (setup_window.winfo_height() // 2)
+        setup_window.geometry(f"+{x}+{y}")
+        
+        main_frame = ttk.Frame(setup_window, padding=20)
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        ttk.Label(main_frame, text="Advanced Monitoring Configuration", 
+                 font=("Arial", 14, "bold")).pack(pady=(0,20))
+        
+        # Symbols configuration
+        symbols_frame = ttk.LabelFrame(main_frame, text="Symbols to Monitor", padding=10)
+        symbols_frame.pack(fill=tk.X, pady=(0,10))
+        
+        symbols_text = tk.Text(symbols_frame, height=3, width=50)
+        symbols_text.insert(tk.END, ", ".join(self.monitoring_symbols))
+        symbols_text.pack(fill=tk.X)
+        ttk.Label(symbols_frame, text="Enter symbols separated by commas (e.g., AAPL, MSFT, TSLA)").pack()
+        
+        # Timeframes configuration
+        timeframes_frame = ttk.LabelFrame(main_frame, text="Timeframes", padding=10)
+        timeframes_frame.pack(fill=tk.X, pady=(0,10))
+        
+        tf_vars = {}
+        available_timeframes = ["1m", "5m", "15m", "30m", "1h", "4h"]
+        
+        tf_grid = ttk.Frame(timeframes_frame)
+        tf_grid.pack()
+        
+        for i, tf in enumerate(available_timeframes):
+            var = tk.BooleanVar(value=tf in self.monitoring_timeframes)
+            tf_vars[tf] = var
+            ttk.Checkbutton(tf_grid, text=tf, variable=var).grid(row=i//3, column=i%3, sticky="w", padx=10)
+        
+        # Advanced settings
+        settings_frame = ttk.LabelFrame(main_frame, text="Advanced Settings", padding=10)
+        settings_frame.pack(fill=tk.X, pady=(0,10))
+        
+        # Base interval
+        interval_frame = ttk.Frame(settings_frame)
+        interval_frame.pack(fill=tk.X, pady=5)
+        ttk.Label(interval_frame, text="Base Fetch Interval (seconds):").pack(side=tk.LEFT)
+        interval_var = tk.IntVar(value=60)
+        interval_spin = ttk.Spinbox(interval_frame, from_=15, to=300, textvariable=interval_var, width=10)
+        interval_spin.pack(side=tk.RIGHT)
+        
+        # Confidence threshold
+        conf_frame = ttk.Frame(settings_frame)
+        conf_frame.pack(fill=tk.X, pady=5)
+        ttk.Label(conf_frame, text="Confidence Threshold:").pack(side=tk.LEFT)
+        conf_var = tk.DoubleVar(value=0.80)
+        conf_scale = ttk.Scale(conf_frame, from_=0.5, to=0.95, variable=conf_var, orient=tk.HORIZONTAL)
+        conf_scale.pack(side=tk.RIGHT, fill=tk.X, expand=True, padx=(10,0))
+        conf_label = ttk.Label(conf_frame, text="80%")
+        conf_label.pack(side=tk.RIGHT)
+        
+        def update_conf_label(*args):
+            conf_label.config(text=f"{conf_var.get():.0%}")
+        conf_var.trace('w', update_conf_label)
+        
+        # Buttons
+        button_frame = ttk.Frame(main_frame)
+        button_frame.pack(fill=tk.X, pady=(20,0))
+        
+        def apply_config():
+            # Update symbols
+            symbols_input = symbols_text.get("1.0", tk.END).strip()
+            self.monitoring_symbols = [s.strip().upper() for s in symbols_input.split(",") if s.strip()]
+            
+            # Update timeframes
+            self.monitoring_timeframes = [tf for tf, var in tf_vars.items() if var.get()]
+            
+            # Create monitoring config
+            config = MonitoringConfig(
+                symbols=self.monitoring_symbols,
+                timeframes=self.monitoring_timeframes,
+                base_interval=interval_var.get(),
+                confidence_threshold=conf_var.get()
+            )
+            
+            # Initialize advanced monitor
+            if self.advanced_monitor:
+                self.advanced_monitor.stop_monitoring()
+            
+            self.advanced_monitor = AdvancedRealtimeMonitor(self, config)
+            
+            setup_window.destroy()
+            messagebox.showinfo("Configuration Applied", 
+                              f"Advanced monitoring configured for {len(self.monitoring_symbols)} symbols "
+                              f"across {len(self.monitoring_timeframes)} timeframes")
+        
+        def start_monitoring():
+            apply_config()
+            if self.advanced_monitor:
+                self.advanced_monitor.start_monitoring()
+        
+        ttk.Button(button_frame, text="Apply Configuration", command=apply_config).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="Start Monitoring", command=start_monitoring).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="Cancel", command=setup_window.destroy).pack(side=tk.RIGHT, padx=5)
+        
+    def show_monitoring_status(self):
+        """Show current monitoring system status"""
+        status_window = tk.Toplevel(self.root)
+        status_window.title("Advanced Monitoring Status")
+        status_window.geometry("700x600")
+        status_window.transient(self.root)
+        
+        # Center window
+        status_window.update_idletasks()
+        x = (status_window.winfo_screenwidth() // 2) - (status_window.winfo_width() // 2)
+        y = (status_window.winfo_screenheight() // 2) - (status_window.winfo_height() // 2)
+        status_window.geometry(f"+{x}+{y}")
+        
+        main_frame = ttk.Frame(status_window, padding=20)
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        ttk.Label(main_frame, text="Advanced Monitoring System Status", 
+                 font=("Arial", 14, "bold")).pack(pady=(0,20))
+        
+        # Status display
+        status_text = tk.Text(main_frame, wrap=tk.WORD, font=("Consolas", 10))
+        scrollbar = ttk.Scrollbar(main_frame, orient=tk.VERTICAL, command=status_text.yview)
+        status_text.configure(yscrollcommand=scrollbar.set)
+        
+        status_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        # Get status information
+        if self.advanced_monitor:
+            status_info = self.advanced_monitor.get_monitoring_status()
+            
+            status_report = f"""ADVANCED REAL-TIME MONITORING STATUS
+========================================
+
+System Status: {'ACTIVE' if status_info['active'] else 'INACTIVE'}
+Symbols Monitored: {status_info['symbols_monitored']}
+Timeframes: {', '.join(status_info['timeframes'])}
+Total Data Buffers: {status_info['total_buffers']}
+Recent Market Snapshots: {status_info['recent_snapshots']}
+
+ADAPTIVE FETCH INTERVALS:
+"""
+            for symbol, interval in status_info['current_intervals'].items():
+                status_report += f"  {symbol}: {interval} seconds\n"
+            
+            status_report += f"""
+FEEDBACK SYSTEM ADJUSTMENTS:
+"""
+            if status_info['feedback_adjustments']:
+                for pattern_type, adjustment in status_info['feedback_adjustments'].items():
+                    status_report += f"  {pattern_type}: {adjustment:+.3f}\n"
+            else:
+                status_report += "  No adjustments applied yet\n"
+                
+            status_report += f"""
+CONFIGURATION:
+  Base Interval: {self.advanced_monitor.config.base_interval}s
+  Min Interval: {self.advanced_monitor.config.min_interval}s
+  Max Interval: {self.advanced_monitor.config.max_interval}s
+  Confidence Threshold: {self.advanced_monitor.config.confidence_threshold:.1%}
+  Buffer Size: {self.advanced_monitor.config.buffer_size} candles
+  Worker Threads: {self.advanced_monitor.config.max_workers}
+
+MONITORED SYMBOLS:
+"""
+            for symbol in self.monitoring_symbols:
+                status_report += f"  • {symbol}\n"
+                
+        else:
+            status_report = """ADVANCED MONITORING NOT CONFIGURED
+
+The advanced real-time monitoring system has not been initialized.
+
+To set up advanced monitoring:
+1. Go to Tools → Advanced Monitoring Setup
+2. Configure symbols and timeframes
+3. Start monitoring
+
+FEATURES:
+• Adaptive fetch intervals based on market volatility
+• Multi-symbol, multi-timeframe monitoring
+• ML-enhanced pattern detection
+• Feedback-driven sensitivity adjustment
+• Thread-safe real-time updates
+"""
+        
+        status_text.insert(tk.END, status_report)
+        status_text.config(state=tk.DISABLED)
+        
+        # Control buttons
+        button_frame = ttk.Frame(main_frame)
+        button_frame.pack(fill=tk.X, pady=(20,0))
+        
+        if self.advanced_monitor and self.advanced_monitor.monitoring_active:
+            ttk.Button(button_frame, text="Stop Monitoring", 
+                      command=lambda: self.advanced_monitor.stop_monitoring()).pack(side=tk.LEFT, padx=5)
+        elif self.advanced_monitor:
+            ttk.Button(button_frame, text="Start Monitoring", 
+                      command=lambda: self.advanced_monitor.start_monitoring()).pack(side=tk.LEFT, padx=5)
+        
+        ttk.Button(button_frame, text="Refresh", 
+                  command=lambda: self.refresh_monitoring_status(status_text)).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="Close", command=status_window.destroy).pack(side=tk.RIGHT, padx=5)
+        
+    def refresh_monitoring_status(self, status_text):
+        """Refresh the monitoring status display"""
+        # This would be called by the refresh button
+        pass
+        
+    def start_advanced_monitoring(self):
+        """Start the advanced monitoring system"""
+        if not self.advanced_monitor:
+            # Create default configuration
+            config = MonitoringConfig(
+                symbols=self.monitoring_symbols,
+                timeframes=self.monitoring_timeframes
+            )
+            self.advanced_monitor = AdvancedRealtimeMonitor(self, config)
+        
+        self.advanced_monitor.start_monitoring()
+        
+    def stop_advanced_monitoring(self):
+        """Stop the advanced monitoring system"""
+        if self.advanced_monitor:
+            self.advanced_monitor.stop_monitoring()

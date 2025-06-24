@@ -7,16 +7,19 @@ This is an AI-powered desktop application built with Python and Tkinter that aut
 ## System Architecture
 
 ### Frontend Architecture
-- **GUI Framework**: Tkinter-based desktop application
+- **GUI Framework**: Tkinter-based desktop application with enhanced UX components
 - **Chart Visualization**: Matplotlib with mplfinance for professional candlestick charts
 - **Modular Design**: Separate frames for chart display, controls, and pattern results
-- **Real-time Updates**: Threading for non-blocking UI updates
+- **Real-time Updates**: Advanced threading architecture for responsive UI updates
+- **Alert System**: Intelligent notifications with smart trading suggestions
+- **Analytics Dashboard**: Pattern history tracking and performance metrics
 
 ### Backend Architecture
-- **Pattern Detection Engine**: Pre-trained machine learning models using TensorFlow/Keras
-- **Data Processing Pipeline**: Pandas and NumPy for data manipulation and technical indicator calculations
-- **API Integration**: Alpha Vantage API for real-time forex data
-- **Configuration Management**: INI-based configuration with environment variable support
+- **Advanced Real-time Monitor**: Adaptive multi-symbol monitoring with volatility-based scheduling
+- **Pattern Detection Engine**: ML-enhanced pattern recognition with feedback learning
+- **Data Processing Pipeline**: Sliding buffer architecture for efficient real-time processing
+- **API Integration**: Financial Datasets API with resilient multi-threaded data fetching
+- **Feedback Engine**: Machine learning system that improves detection accuracy over time
 
 ## Key Components
 
@@ -42,12 +45,13 @@ This is an AI-powered desktop application built with Python and Tkinter that aut
 
 ## Data Flow
 
-1. **Data Acquisition**: Alpha Vantage API fetches real-time forex data with rate limiting
-2. **Data Processing**: Raw OHLCV data is cleaned and enhanced with technical indicators
-3. **Pattern Detection**: ML models analyze processed data to identify chart patterns
-4. **Visualization**: Detected patterns are overlaid on interactive charts
-5. **Real-time Monitoring**: Background threads continuously monitor for new patterns
-6. **Export/Alerts**: Results are saved and notifications are sent based on user preferences
+1. **Adaptive Data Acquisition**: Multi-threaded system fetches data with volatility-based intervals
+2. **Sliding Buffer Management**: Maintains recent N candles per symbol/timeframe for efficient processing
+3. **Real-time Processing**: Technical indicators applied to streaming data with minimal latency
+4. **ML-Enhanced Detection**: Pattern recognition using rule-based algorithms and neural networks
+5. **Confidence Scoring**: Advanced scoring engine with feedback-driven sensitivity adjustment
+6. **Intelligent Alerts**: High-confidence patterns trigger smart notifications with trading suggestions
+7. **Analytics Integration**: All patterns tracked for performance analysis and system learning
 
 ## External Dependencies
 
@@ -106,6 +110,10 @@ Changelog:
 - June 22, 2025. Integrated comprehensive UX enhancements: intelligent alert system, preferences dialog, analytics dashboard
 - June 22, 2025. Added smart trading suggestions with confidence-based recommendations for detected patterns
 - June 22, 2025. Enhanced menu system with professional trading features and pattern history tracking
+- June 24, 2025. Implemented advanced real-time monitoring system with adaptive fetch intervals based on market volatility
+- June 24, 2025. Added multi-symbol, multi-timeframe monitoring with sliding buffer architecture
+- June 24, 2025. Integrated feedback-driven pattern detection with machine learning sensitivity adjustment
+- June 24, 2025. Enhanced threading architecture for improved responsiveness and error resilience
 ```
 
 ## User Preferences
