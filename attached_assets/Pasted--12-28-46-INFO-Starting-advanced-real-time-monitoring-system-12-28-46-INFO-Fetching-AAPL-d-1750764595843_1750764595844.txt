@@ -1,0 +1,68 @@
+
+12:28:46 - INFO - Starting advanced real-time monitoring system
+12:28:46 - INFO - Fetching AAPL data with 1m interval for 30 days
+12:28:46 - INFO - Status: Advanced real-time monitoring started
+12:28:46 - ERROR - Unsupported interval: 1m
+12:28:46 - INFO - Fetching MSFT data with 1m interval for 30 days
+12:28:46 - INFO - Fetching TSLA data with 1m interval for 30 days
+12:28:46 - ERROR - Unsupported interval: 1m
+12:28:46 - ERROR - Unsupported interval: 1m
+12:28:48 - ERROR - Unsupported interval: 1m
+12:28:48 - ERROR - Unsupported interval: 1m
+12:28:48 - ERROR - Unsupported interval: 1m
+12:28:52 - ERROR - Unsupported interval: 1m
+12:28:52 - ERROR - Unsupported interval: 1m
+12:28:52 - ERROR - Unsupported interval: 1m
+Traceback (most recent call last):
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\main.py", line 147, in <module>
+    main()
+  File "C:\Users\Dell\OneDrive\Desktop\PROJECTS\COSTUMERS\TRADE_PATTERN\forex\main.py", line 125, in main
+    root.mainloop()
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1504, in mainloop
+    self.tk.mainloop(n)
+KeyboardInterrupt
+12:29:00 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:00 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:00 - ERROR - No data retrieved for the entire period
+12:29:00 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:00 - ERROR - No data retrieved for the entire period
+12:29:00 - INFO - Fetching AAPL data with 5m interval for 30 days
+12:29:00 - ERROR - No data retrieved for the entire period
+12:29:00 - INFO - Fetching TSLA data with 5m interval for 30 days
+12:29:00 - ERROR - Unsupported interval: 5m
+12:29:00 - INFO - Fetching MSFT data with 5m interval for 30 days
+12:29:00 - ERROR - Unsupported interval: 5m
+12:29:00 - ERROR - Unsupported interval: 5m
+12:29:02 - ERROR - Unsupported interval: 5m
+12:29:02 - ERROR - Unsupported interval: 5m
+12:29:02 - ERROR - Unsupported interval: 5m
+12:29:06 - ERROR - Unsupported interval: 5m
+12:29:06 - ERROR - Unsupported interval: 5m
+12:29:06 - ERROR - Unsupported interval: 5m
+12:29:14 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:14 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:14 - ERROR - No data retrieved for the entire period
+12:29:14 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:14 - ERROR - No data retrieved for the entire period
+12:29:14 - INFO - Fetching AAPL data with 15m interval for 30 days
+12:29:14 - ERROR - No data retrieved for the entire period
+12:29:14 - INFO - Fetching TSLA data with 15m interval for 30 days
+12:29:14 - ERROR - Unsupported interval: 15m
+12:29:14 - INFO - Fetching MSFT data with 15m interval for 30 days
+12:29:14 - ERROR - Unsupported interval: 15m
+12:29:14 - ERROR - Unsupported interval: 15m
+12:29:16 - ERROR - Unsupported interval: 15m
+12:29:16 - ERROR - Unsupported interval: 15m
+12:29:16 - ERROR - Unsupported interval: 15m
+12:29:20 - ERROR - Unsupported interval: 15m
+12:29:20 - ERROR - Unsupported interval: 15m
+12:29:20 - ERROR - Unsupported interval: 15m
+12:29:28 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:28 - ERROR - No data retrieved for the entire period
+Exception ignored in: <module 'threading' from 'C:\\Users\\Dell\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\threading.py'>
+Traceback (most recent call last):
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1560, in _shutdown
+12:29:28 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:28 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:29:28 - ERROR - No data retrieved for the entire period
+12:29:28 - ERROR - No data retrieved for the entire period

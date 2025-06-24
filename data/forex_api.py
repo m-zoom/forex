@@ -133,12 +133,33 @@ class FinancialDataAPI:
         
         Args:
             symbol: Stock symbol (e.g., "AAPL", "MSFT") 
-            interval: Time interval (1min, 5min, 15min, 30min, 60min, daily)
+            interval: Time interval (supported: daily, weekly, monthly)
             outputsize: compact (30 days) or full (150 days)
         
         Returns:
             pandas.DataFrame: OHLCV data
         """
+        
+        # Map requested intervals to supported API format
+        interval_mapping = {
+            "1m": ("minute", 1),
+            "5m": ("minute", 5), 
+            "15m": ("minute", 15),
+            "30m": ("minute", 30),
+            "1h": ("hour", 1),
+            "4h": ("hour", 4),
+            "1d": ("day", 1),
+            "daily": ("day", 1),
+            "weekly": ("week", 1),
+            "monthly": ("month", 1)
+        }
+        
+        # Use mapped interval or default to daily
+        if interval not in interval_mapping:
+            self.logger.warning(f"Unsupported interval '{interval}', using daily")
+            interval = "daily"
+        
+        interval_type, multiplier = interval_mapping[interval]
         # Determine days based on outputsize
         days_back = 30 if outputsize == "compact" else 150
         

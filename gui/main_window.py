@@ -48,7 +48,7 @@ class MainWindow:
         # Advanced monitoring system
         self.advanced_monitor = None
         self.monitoring_symbols = ["AAPL", "MSFT", "TSLA"]  # Default symbols
-        self.monitoring_timeframes = ["1m", "5m", "15m"]  # Default timeframes
+        self.monitoring_timeframes = ["daily", "1h"]  # Default to supported timeframes
         
         self.setup_ui()
         self.setup_menu()
@@ -1151,14 +1151,14 @@ Built with ❤️ for the trading community
         symbols_text = tk.Text(symbols_frame, height=3, width=50)
         symbols_text.insert(tk.END, ", ".join(self.monitoring_symbols))
         symbols_text.pack(fill=tk.X)
-        ttk.Label(symbols_frame, text="Enter symbols separated by commas (e.g., AAPL, MSFT, TSLA)").pack()
+        ttk.Label(symbols_frame, text="Enter symbols separated by commas (e.g., AAPL, MSFT, TSLA)\nSupported intervals: 1h, 4h, daily, weekly, monthly").pack()
         
         # Timeframes configuration
         timeframes_frame = ttk.LabelFrame(main_frame, text="Timeframes", padding=10)
         timeframes_frame.pack(fill=tk.X, pady=(0,10))
         
         tf_vars = {}
-        available_timeframes = ["1m", "5m", "15m", "30m", "1h", "4h"]
+        available_timeframes = ["1h", "4h", "daily", "weekly", "monthly"]
         
         tf_grid = ttk.Frame(timeframes_frame)
         tf_grid.pack()
@@ -1176,8 +1176,8 @@ Built with ❤️ for the trading community
         interval_frame = ttk.Frame(settings_frame)
         interval_frame.pack(fill=tk.X, pady=5)
         ttk.Label(interval_frame, text="Base Fetch Interval (seconds):").pack(side=tk.LEFT)
-        interval_var = tk.IntVar(value=60)
-        interval_spin = ttk.Spinbox(interval_frame, from_=15, to=300, textvariable=interval_var, width=10)
+        interval_var = tk.IntVar(value=300)
+        interval_spin = ttk.Spinbox(interval_frame, from_=60, to=1800, textvariable=interval_var, width=10)
         interval_spin.pack(side=tk.RIGHT)
         
         # Confidence threshold

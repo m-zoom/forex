@@ -28,10 +28,10 @@ from collections import deque
 class MonitoringConfig:
     """Configuration for real-time monitoring system"""
     symbols: List[str]
-    timeframes: List[str]  # ['1m', '5m', '15m', '1h']
-    base_interval: int = 60  # Base fetch interval in seconds
-    min_interval: int = 15   # Minimum interval during high volatility
-    max_interval: int = 300  # Maximum interval during low volatility
+    timeframes: List[str]  # ['daily', 'weekly', 'monthly'] - API supported intervals
+    base_interval: int = 300  # Base fetch interval in seconds (5 minutes for daily data)
+    min_interval: int = 60   # Minimum interval during high volatility (1 minute)
+    max_interval: int = 1800  # Maximum interval during low volatility (30 minutes)
     buffer_size: int = 200   # Number of candles to maintain per symbol/timeframe
     confidence_threshold: float = 0.80  # Minimum confidence for alerts
     volatility_window: int = 20  # Period for volatility calculation
