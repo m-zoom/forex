@@ -114,6 +114,7 @@ Changelog:
 - June 24, 2025. Added multi-symbol, multi-timeframe monitoring with sliding buffer architecture
 - June 24, 2025. Integrated feedback-driven pattern detection with machine learning sensitivity adjustment
 - June 24, 2025. Enhanced threading architecture for improved responsiveness and error resilience
+- June 24, 2025. Fixed API interval mapping inconsistency causing "Unsupported interval" errors for 1h, 4h timeframes
 ```
 
 ## User Preferences

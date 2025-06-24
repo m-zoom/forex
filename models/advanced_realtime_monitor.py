@@ -286,9 +286,12 @@ class AdvancedRealtimeMonitor:
         """Fetch data for all timeframes of a symbol"""
         try:
             for timeframe in self.config.timeframes:
-                # Fetch new data from API
-                data = self.main_window.forex_api.get_forex_data(
-                    symbol, timeframe, "compact"
+                # Fetch new data from API using get_data_chunk for real-time monitoring
+                end_date = datetime.now().strftime('%Y-%m-%d')
+                start_date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+                
+                data = self.main_window.forex_api.get_data_chunk(
+                    symbol, start_date, end_date, timeframe
                 )
                 
                 if data is not None and not data.empty:

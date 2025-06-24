@@ -1,0 +1,53 @@
+
+12:33:13 - INFO - ==================================================
+12:33:13 - INFO - Starting Forex Pattern Recognition System v1.0.0
+12:33:13 - INFO - ==================================================
+12:33:13 - INFO - Configuration loaded successfully
+12:33:13 - INFO - Desktop Tkinter application starting...
+12:33:14 - INFO - Main UI setup completed
+12:33:14 - INFO - GUI initialized successfully
+12:33:14 - INFO - Application ready for use
+12:33:14 - INFO - Status: Checking API connection...
+12:33:14 - INFO - Validating API key
+12:33:14 - INFO - Requesting AAPL data from 2025-06-19 to 2025-06-24...
+12:33:16 - INFO - Retrieved 422 records for 2025-06-19 to 2025-06-24
+12:33:16 - INFO - API key validation successful
+12:33:16 - INFO - Status: API connection successful
+12:33:33 - INFO - Starting advanced real-time monitoring system
+12:33:33 - INFO - Fetching AAPL data with 1h interval for 30 days
+12:33:33 - INFO - Status: Advanced real-time monitoring started
+12:33:33 - ERROR - Unsupported interval: 1h
+12:33:33 - INFO - Fetching MSFT data with 1h interval for 30 days
+12:33:33 - INFO - Fetching TSLA data with 1h interval for 30 days
+12:33:33 - ERROR - Unsupported interval: 1h
+12:33:33 - ERROR - Unsupported interval: 1h
+12:33:35 - ERROR - Unsupported interval: 1h
+12:33:35 - ERROR - Unsupported interval: 1h
+12:33:35 - ERROR - Unsupported interval: 1h
+12:33:39 - ERROR - Unsupported interval: 1h
+12:33:39 - ERROR - Unsupported interval: 1h
+12:33:39 - ERROR - Unsupported interval: 1h
+12:33:47 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:33:47 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:33:47 - ERROR - No data retrieved for the entire period
+12:33:47 - WARNING - Failed to get data for 2025-05-25 to 2025-06-24 after 3 attempts
+12:33:47 - ERROR - No data retrieved for the entire period
+12:33:47 - INFO - Fetching AAPL data with daily interval for 30 days
+12:33:47 - ERROR - No data retrieved for the entire period
+12:33:47 - INFO - Fetching MSFT data with daily interval for 30 days
+12:33:47 - INFO - Requesting AAPL data from 2025-05-25 to 2025-06-24...
+12:33:47 - INFO - Fetching TSLA data with daily interval for 30 days
+12:33:47 - INFO - Requesting MSFT data from 2025-05-25 to 2025-06-24...
+12:33:47 - INFO - Requesting TSLA data from 2025-05-25 to 2025-06-24...
+12:33:48 - INFO - Retrieved 20 records for 2025-05-25 to 2025-06-24
+12:33:48 - INFO - Successfully fetched 20 records for MSFT
+12:33:48 - INFO - Data processing completed. Shape: (1, 27)
+12:33:48 - INFO - Retrieved 20 records for 2025-05-25 to 2025-06-24
+12:33:48 - INFO - Detected 0 patterns
+12:33:48 - INFO - Successfully fetched 20 records for AAPL
+12:33:48 - INFO - Data processing completed. Shape: (1, 27)
+12:33:48 - INFO - Retrieved 20 records for 2025-05-25 to 2025-06-24
+12:33:48 - INFO - Detected 0 patterns
+12:33:48 - INFO - Successfully fetched 20 records for TSLA
+12:33:48 - INFO - Data processing completed. Shape: (1, 27)
+12:33:48 - INFO - Detected 0 patterns
