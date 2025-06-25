@@ -117,6 +117,8 @@ Changelog:
 - June 24, 2025. Fixed API interval mapping inconsistency causing "Unsupported interval" errors for 1h, 4h timeframes
 - June 25, 2025. Completed comprehensive analysis of entire codebase covering 250+ functions across 30+ classes
 - June 25, 2025. Documented all GUI components, ML models, threading architecture, and configuration systems
+- June 25, 2025. Created detailed developer guide with internal component explanations and development workflow
+- June 25, 2025. Refactored threading architecture to use asyncio + bounded thread pools, reducing complexity from 4+ threads to 2 core components
 ```
 
 ## User Preferences

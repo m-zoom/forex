@@ -16,12 +16,13 @@ from .alert_system import AlertSystem
 from .preferences_dialog import PreferencesDialog
 from .analytics_dashboard import AnalyticsDashboard
 from data.forex_api import ForexAPI
-from models.advanced_realtime_monitor import AdvancedRealtimeMonitor, MonitoringConfig
+from models.advanced_realtime_monitor import AdvancedRealtimeMonitor
+from models.async_realtime_monitor import AsyncMonitoringMixin, MonitoringConfig
 from data.data_processor import DataProcessor
 from models.pattern_detector import PatternDetector
 from utils.helpers import save_results, load_results
 
-class MainWindow:
+class MainWindow(AsyncMonitoringMixin):
     def __init__(self, root, config, logger):
         self.root = root
         self.config = config
