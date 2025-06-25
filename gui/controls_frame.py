@@ -479,11 +479,12 @@ class ControlsFrame(ttk.Frame):
             return
         
         try:
-            # Use async monitoring by default
+            # Use async monitoring by default with user-configured interval
             monitoring_type = self.main_window.config.get('REALTIME', 'monitoring_type', 'async')
             
             if monitoring_type == 'async':
-                self.main_window.start_async_realtime()
+                # Pass the interval setting to advanced monitoring
+                self.main_window.start_async_realtime(interval=interval)
             else:
                 self.main_window.start_real_time(symbol, interval)
             
@@ -491,6 +492,8 @@ class ControlsFrame(ttk.Frame):
             self.realtime_status_var.set("🟢 Active")
             self.start_realtime_button.config(state=tk.DISABLED)
             self.stop_realtime_button.config(state=tk.NORMAL)
+            
+            self.main_window.logger.info(f"Started real-time monitoring with {interval}s interval")
             
         except Exception as e:
             messagebox.showerror("Real-time Error", f"Failed to start real-time monitoring: {str(e)}")

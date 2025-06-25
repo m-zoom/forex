@@ -121,6 +121,8 @@ Changelog:
 - June 25, 2025. Refactored threading architecture to use asyncio + bounded thread pools, reducing complexity from 4+ threads to 2 core components
 - June 25, 2025. Fixed MonitoringConfig import error, async monitoring system now fully operational
 - June 25, 2025. Created comprehensive user documentation (USER_GUIDE.md) and quick start guide for easy onboarding
+- June 25, 2025. Fixed advanced real-time monitoring interval configuration - user settings (10-300s) now properly applied to monitoring system
+- June 25, 2025. Resolved candlestick chart "zero-size array" error with enhanced data validation and minimum data requirements
 ```
 
 ## User Preferences

@@ -28,20 +28,25 @@ class MarketSnapshot:
 class AsyncRealtimeMonitor:
     """Simplified real-time monitoring with asyncio + thread pools"""
     
-    def __init__(self, config, main_window):
-        self.config = config
+    def __init__(self, main_window):
         self.main_window = main_window
-        self.logger = logging.getLogger(__name__)
+        self.logger = main_window.logger
+        self.config = main_window.config
         
         # Asyncio components
         self.session = None
         self.monitoring_active = False
         self.data_ingestion_task = None
         
+        # Configuration
+        self.symbols = ['AAPL', 'MSFT', 'GOOGL']  # Default symbols
+        self.timeframes = ['daily']  # Default timeframe
+        self.fetch_interval = 60  # Default 60 seconds
+        self.user_interval = None  # User-configured interval
+        
         # Thread pool for CPU-bound pattern detection
-        symbols = getattr(config, 'symbols', ['AAPL', 'MSFT', 'TSLA'])
         self.pattern_executor = ThreadPoolExecutor(
-            max_workers=min(4, len(symbols)),
+            max_workers=min(4, len(self.symbols)),
             thread_name_prefix="pattern_detector"
         )
         
@@ -53,6 +58,12 @@ class AsyncRealtimeMonitor:
         # GUI update queue with listener
         self.gui_queue = queue.Queue(maxsize=100)
         self.gui_listener = None
+        
+    def update_interval(self, interval_seconds: int):
+        """Update the monitoring interval"""
+        self.user_interval = interval_seconds
+        self.fetch_interval = interval_seconds
+        self.logger.info(f"Monitoring interval updated to {interval_seconds} seconds")
         
     async def start_monitoring(self):
         """Start async monitoring system"""
@@ -162,10 +173,10 @@ class AsyncRealtimeMonitor:
             # Build API request
             params = {
                 'ticker': symbol,
-                'interval': '5min',
+                'interval': 'daily',
                 'start_date': start_date,
                 'end_date': end_date,
-                'api_key': self.config.get('API', 'financial_datasets_api_key')
+                'api_key': self.config.get('API', 'financial_datasets_api_key', 'demo')
             }
             
             # Make async HTTP request
