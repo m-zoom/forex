@@ -2,7 +2,21 @@
 
 ## Overview of Threading Strategy
 
-The Forex Pattern Recognition System uses a sophisticated multi-threading architecture to achieve responsive real-time performance while maintaining GUI stability.
+The Forex Pattern Recognition System has been refactored from complex multi-threading to a simplified async + bounded thread pool architecture for better performance and maintainability.
+
+## ⚠️ ARCHITECTURE CHANGE NOTICE
+**This guide documents the OLD threading system. The NEW simplified system is implemented in `models/async_realtime_monitor.py`**
+
+**For current implementation, see:**
+- `THREADING_REFACTOR_SUMMARY.md` - New architecture details
+- `models/async_realtime_monitor.py` - Implementation
+- `AsyncMonitoringMixin` - Integration pattern
+
+---
+
+## Legacy Threading Strategy (Deprecated)
+
+The original system used a sophisticated multi-threading architecture (now replaced):
 
 ### Core Threading Principles
 

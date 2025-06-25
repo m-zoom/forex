@@ -39,8 +39,9 @@ class AsyncRealtimeMonitor:
         self.data_ingestion_task = None
         
         # Thread pool for CPU-bound pattern detection
+        symbols = getattr(config, 'symbols', ['AAPL', 'MSFT', 'TSLA'])
         self.pattern_executor = ThreadPoolExecutor(
-            max_workers=min(4, len(config.symbols)),
+            max_workers=min(4, len(symbols)),
             thread_name_prefix="pattern_detector"
         )
         
@@ -110,7 +111,8 @@ class AsyncRealtimeMonitor:
                 fetch_tasks = []
                 current_time = time.time()
                 
-                for symbol in self.config.symbols:
+                symbols = getattr(self.config, 'symbols', ['AAPL', 'MSFT', 'TSLA'])
+                for symbol in symbols:
                     # Check if symbol needs update
                     last_fetch = getattr(self, f'last_fetch_{symbol}', 0)
                     interval = self.fetch_intervals.get(symbol, 60)

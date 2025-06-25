@@ -17,7 +17,7 @@ from .preferences_dialog import PreferencesDialog
 from .analytics_dashboard import AnalyticsDashboard
 from data.forex_api import ForexAPI
 from models.advanced_realtime_monitor import AdvancedRealtimeMonitor
-from models.async_realtime_monitor import AsyncMonitoringMixin, MonitoringConfig
+from models.async_realtime_monitor import AsyncMonitoringMixin
 from data.data_processor import DataProcessor
 from models.pattern_detector import PatternDetector
 from utils.helpers import save_results, load_results
@@ -50,6 +50,9 @@ class MainWindow(AsyncMonitoringMixin):
         self.advanced_monitor = None
         self.monitoring_symbols = ["AAPL", "MSFT", "TSLA"]  # Default symbols
         self.monitoring_timeframes = ["daily", "1h"]  # Default to supported timeframes
+        
+        # Initialize async monitoring
+        self.__init_async_monitoring__()
         
         self.setup_ui()
         self.setup_menu()

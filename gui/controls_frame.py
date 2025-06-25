@@ -479,7 +479,13 @@ class ControlsFrame(ttk.Frame):
             return
         
         try:
-            self.main_window.start_real_time(symbol, interval)
+            # Use async monitoring by default
+            monitoring_type = self.main_window.config.get('REALTIME', 'monitoring_type', 'async')
+            
+            if monitoring_type == 'async':
+                self.main_window.start_async_realtime()
+            else:
+                self.main_window.start_real_time(symbol, interval)
             
             # Update UI
             self.realtime_status_var.set("🟢 Active")
@@ -492,6 +498,8 @@ class ControlsFrame(ttk.Frame):
     def stop_realtime(self):
         """Stop real-time monitoring"""
         try:
+            # Stop both monitoring systems
+            self.main_window.stop_async_realtime()
             self.main_window.stop_real_time()
             
             # Update UI
