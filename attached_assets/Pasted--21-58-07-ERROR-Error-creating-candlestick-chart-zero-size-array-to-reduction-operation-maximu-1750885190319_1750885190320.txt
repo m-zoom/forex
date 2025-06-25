@@ -1,0 +1,34 @@
+
+21:58:07 - ERROR - Error creating candlestick chart: zero-size array to reduction operation maximum which has no identity
+21:58:07 - INFO - Falling back to line chart
+21:58:07 - INFO - Chart updated successfully with 1 data points
+21:58:07 - INFO - Status: Real-time: AAPL @ 201.40000 (Vol: 0.500, Interval: 930s)
+21:58:07 - ERROR - Error creating candlestick chart: zero-size array to reduction operation maximum which has no identity
+21:58:07 - INFO - Falling back to line chart
+21:58:08 - INFO - Chart updated successfully with 1 data points
+21:58:08 - INFO - Status: Real-time: AAPL @ 201.40000 (Vol: 0.500, Interval: 930s)
+21:58:08 - INFO - Retrieved 2 records for 2025-06-24 to 2025-06-25
+21:58:08 - INFO - Data processing completed. Shape: (1, 27)
+21:58:08 - INFO - Detected 0 patterns
+21:58:08 - INFO - Retrieved 2 records for 2025-06-24 to 2025-06-25
+21:58:08 - INFO - Data processing completed. Shape: (1, 27)
+21:58:08 - INFO - Detected 0 patterns
+21:58:08 - INFO - Retrieved 2 records for 2025-06-24 to 2025-06-25
+21:58:08 - INFO - Data processing completed. Shape: (1, 27)
+21:58:08 - INFO - Detected 0 patterns
+21:58:08 - ERROR - Error creating candlestick chart: zero-size array to reduction operation maximum which has no identity
+21:58:08 - INFO - Falling back to line chart
+21:58:08 - INFO - Chart updated successfully with 1 data points
+21:58:08 - INFO - Status: Real-time: AAPL @ 201.56000 (Vol: 0.500, Interval: 930s)
+21:58:54 - INFO - Advanced real-time monitoring stopped
+21:58:54 - INFO - Status: Real-time monitoring stopped
+21:58:57 - INFO - Starting advanced real-time monitoring system
+21:58:57 - INFO - Requesting AAPL data from 2025-06-24 to 2025-06-25...
+21:58:57 - INFO - Status: Advanced real-time monitoring started
+21:58:58 - INFO - Retrieved 29 records for 2025-06-24 to 2025-06-25
+21:58:58 - INFO - Data processing completed. Shape: (1, 27)
+21:58:58 - INFO - Detected 0 patterns
+21:58:58 - ERROR - Error creating candlestick chart: zero-size array to reduction operation maximum which has no identity
+21:58:58 - INFO - Falling back to line chart
+21:58:58 - INFO - Chart updated successfully with 1 data points
+21:58:58 - INFO - Status: Real-time: AAPL @ 201.40000 (Vol: 0.500, Interval: 930s)

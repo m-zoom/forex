@@ -181,9 +181,19 @@ class FinancialDataAPI:
         
         self.logger.info(f"Fetching {symbol} data with {interval} interval for {days_back} days")
         
-        # Calculate date range
+        # Calculate date range - ensure we get meaningful data
         end_date = datetime.now()
         start_date = end_date - timedelta(days=days_back)
+        
+        # For real-time monitoring, ensure we get at least a week of data
+        if days_back < 7:
+            start_date = end_date - timedelta(days=7)
+            self.logger.info(f"Extending date range to ensure sufficient data: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
+        
+        # Skip weekends for stock data to avoid empty responses
+        if end_date.weekday() >= 5:  # Saturday or Sunday
+            end_date = end_date - timedelta(days=end_date.weekday() - 4)  # Go back to Friday
+            self.logger.info(f"Adjusted end date to avoid weekend: {end_date.strftime('%Y-%m-%d')}")
         
         # Generate monthly chunks for larger requests
         chunks = []

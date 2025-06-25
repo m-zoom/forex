@@ -185,6 +185,12 @@ class ChartFrame(ttk.Frame):
     def create_candlestick_chart(self, data):
         """Create candlestick chart"""
         try:
+            # Check if we have enough data for candlestick chart
+            if len(data) < 2:
+                self.main_window.logger.warning(f"Insufficient data for candlestick chart ({len(data)} points), falling back to line chart")
+                self.create_line_chart(data)
+                return
+            
             # Prepare data for mplfinance
             plot_data = data.copy()
             plot_data.index = pd.to_datetime(plot_data.index)
@@ -194,6 +200,25 @@ class ChartFrame(ttk.Frame):
             for col in required_cols:
                 if col not in plot_data.columns:
                     raise ValueError(f"Missing required column: {col}")
+            
+            # Validate OHLC data integrity
+            if plot_data[required_cols].isnull().any().any():
+                self.main_window.logger.warning("OHLC data contains null values, falling back to line chart")
+                self.create_line_chart(data)
+                return
+                
+            # Check for valid OHLC relationships
+            valid_ohlc = (
+                (plot_data['high'] >= plot_data['open']) &
+                (plot_data['high'] >= plot_data['close']) &
+                (plot_data['low'] <= plot_data['open']) &
+                (plot_data['low'] <= plot_data['close'])
+            )
+            
+            if not valid_ohlc.all():
+                self.main_window.logger.warning("Invalid OHLC relationships detected, falling back to line chart")
+                self.create_line_chart(data)
+                return
             
             # Additional plots
             addplot = []
@@ -236,11 +261,15 @@ class ChartFrame(ttk.Frame):
                 facecolor='white'
             )
             
+            # Additional safety check before plotting
+            if len(plot_data) == 0:
+                raise ValueError("No data available for plotting")
+                
             fig, axes = mpf.plot(
                 plot_data,
                 type='candle',
                 style=style,
-                addplot=addplot,
+                addplot=addplot if addplot else None,
                 volume=show_volume,
                 figsize=(14, 10),
                 returnfig=True,

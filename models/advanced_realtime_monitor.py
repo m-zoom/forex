@@ -319,37 +319,62 @@ class AdvancedRealtimeMonitor:
         while self.monitoring_active:
             try:
                 # Get new data from queue with timeout
-                symbol, timeframe, candle_data = self.data_queue.get(timeout=1)
+                symbol, timeframe, data = self.data_queue.get(timeout=1)
                 
-                # Process the new data
-                buffer_key = (symbol, timeframe)
-                if buffer_key in self.buffers:
+                # Process the data - data can be either a single candle dict or DataFrame
+                if isinstance(data, pd.DataFrame) and not data.empty:
+                    # Full dataset provided - use directly
+                    processed_data = self.main_window.data_processor.process_data(data)
+                    volatility = self._calculate_volatility(data)
+                else:
+                    # Single candle or insufficient data - get from buffer
+                    buffer_key = (symbol, timeframe)
+                    if buffer_key not in self.buffers:
+                        continue
+                        
                     df = self.buffers[buffer_key].get_dataframe()
+                    if df.empty or len(df) < 5:  # Need minimum data for processing
+                        self.logger.debug(f"Insufficient buffer data for {symbol} {timeframe}: {len(df)} points")
+                        continue
+                        
+                    processed_data = self.main_window.data_processor.process_data(df)
+                    volatility = self.buffers[buffer_key].calculate_volatility()
+                
+                if not processed_data.empty and len(processed_data) >= 2:
+                    # Create market snapshot with sufficient data
+                    snapshot = MarketSnapshot(
+                        symbol=symbol,
+                        timeframe=timeframe,
+                        data=processed_data,
+                        last_update=datetime.now(),
+                        volatility=volatility,
+                        patterns=[],  # Will be filled by pattern detection
+                        indicators=self._extract_latest_indicators(processed_data)
+                    )
                     
-                    if not df.empty:
-                        # Apply technical indicators
-                        processed_data = self.main_window.data_processor.process_data(df)
-                        
-                        # Create market snapshot
-                        volatility = self.buffers[buffer_key].calculate_volatility()
-                        
-                        snapshot = MarketSnapshot(
-                            symbol=symbol,
-                            timeframe=timeframe,
-                            data=processed_data,
-                            last_update=datetime.now(),
-                            volatility=volatility,
-                            patterns=[],  # Will be filled by pattern detection
-                            indicators=self._extract_latest_indicators(processed_data)
-                        )
-                        
-                        # Queue for pattern detection
-                        self.pattern_queue.put(snapshot)
+                    # Queue for pattern detection
+                    self.pattern_queue.put(snapshot)
+                    
+                    # Also queue for GUI update
+                    self.gui_update_queue.put({
+                        'type': 'data_update',
+                        'snapshot': snapshot
+                    })
                         
             except queue.Empty:
                 continue
             except Exception as e:
                 self.logger.error(f"Error in data acquisition worker: {e}")
+                
+    def _calculate_volatility(self, data: pd.DataFrame) -> float:
+        """Calculate volatility for a dataset"""
+        try:
+            if len(data) < 5:
+                return 0.5  # Default moderate volatility
+            returns = data['close'].pct_change().dropna()
+            return float(returns.std() * 100) if len(returns) > 0 else 0.5
+        except Exception:
+            return 0.5
                 
     def _pattern_detection_worker(self):
         """Background worker that detects patterns in processed data"""
