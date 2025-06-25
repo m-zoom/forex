@@ -286,30 +286,39 @@ class AdvancedRealtimeMonitor:
         """Fetch data for all timeframes of a symbol"""
         try:
             for timeframe in self.config.timeframes:
-                # Fetch new data from API using get_data_chunk for real-time monitoring
-                end_date = datetime.now().strftime('%Y-%m-%d')
-                start_date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
-                
-                data = self.main_window.forex_api.get_data_chunk(
-                    symbol, start_date, end_date, timeframe
+                # For real-time monitoring, get substantial data to support charts
+                data = self.main_window.forex_api.get_forex_data(
+                    symbol, 
+                    interval=timeframe, 
+                    outputsize="full"  # Get comprehensive data for better charts
                 )
                 
-                if data is not None and not data.empty:
-                    # Convert latest candle to buffer format
-                    latest_candle = {
-                        'timestamp': data.index[-1],
-                        'open': data['open'].iloc[-1],
-                        'high': data['high'].iloc[-1], 
-                        'low': data['low'].iloc[-1],
-                        'close': data['close'].iloc[-1],
-                        'volume': data.get('volume', pd.Series([0])).iloc[-1]
-                    }
-                    
-                    # Add to buffer and queue for processing if new
+                if data is not None and not data.empty and len(data) >= 5:
+                    # Populate buffer with recent data for context
                     buffer_key = (symbol, timeframe)
                     if buffer_key in self.buffers:
-                        if self.buffers[buffer_key].add_candle(latest_candle):
-                            self.data_queue.put((symbol, timeframe, latest_candle))
+                        # Add recent data points to buffer (last 100 for comprehensive analysis)
+                        recent_data = data.tail(100)
+                        buffer_updated = False
+                        
+                        for idx, row in recent_data.iterrows():
+                            candle = {
+                                'timestamp': idx,
+                                'open': float(row['open']),
+                                'high': float(row['high']), 
+                                'low': float(row['low']),
+                                'close': float(row['close']),
+                                'volume': float(row.get('volume', 0))
+                            }
+                            if self.buffers[buffer_key].add_candle(candle):
+                                buffer_updated = True
+                        
+                        if buffer_updated:
+                            # Queue the complete dataset for processing
+                            self.data_queue.put((symbol, timeframe, data))
+                            self.logger.info(f"Updated {symbol} {timeframe} buffer with {len(recent_data)} data points")
+                else:
+                    self.logger.warning(f"Insufficient data for {symbol} {timeframe}: {len(data) if data is not None and not data.empty else 0} points")
                             
         except Exception as e:
             self.logger.error(f"Error fetching data for {symbol}: {e}")
