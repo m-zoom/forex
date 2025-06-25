@@ -38,10 +38,13 @@ class FinancialDataAPI:
         self.cache = {}
         self.cache_duration = 300  # 5 minutes
         
-        # Check for API key in environment
+        # Check for API key in environment (prioritize environment over config)
         env_key = os.getenv("FINANCIAL_DATASETS_API_KEY")
-        if env_key:
-            self.api_key = env_key
+        if env_key and env_key.strip() and env_key != "demo":
+            self.api_key = env_key.strip()
+            self.logger.info("Using API key from environment variable")
+        elif self.api_key == "demo":
+            self.logger.warning("No valid API key found, using demo mode")
     
     def _make_request(self, params: Dict[str, str]) -> Optional[Dict[str, Any]]:
         """Make API request with rate limiting and retries"""

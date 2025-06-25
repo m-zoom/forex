@@ -405,7 +405,7 @@ class AsyncMonitoringMixin:
     
     def __init_async_monitoring__(self):
         """Initialize async monitoring system"""
-        self.async_monitor = AsyncRealtimeMonitor(self.config, self)
+        self.async_monitor = AsyncRealtimeMonitor(self)
         self.monitoring_loop = None
         
     def start_async_realtime(self):

@@ -1363,3 +1363,28 @@ FEATURES:
         """Stop the advanced monitoring system"""
         if self.advanced_monitor:
             self.advanced_monitor.stop_monitoring()
+            
+    def start_async_realtime(self, interval=None):
+        """Start async real-time monitoring system with configurable interval"""
+        try:
+            if not hasattr(self, 'async_monitor') or self.async_monitor is None:
+                # Import here to avoid circular dependencies
+                from models.async_realtime_monitor import AsyncRealtimeMonitor
+                
+                self.async_monitor = AsyncRealtimeMonitor(self)
+                
+            # Update interval if provided
+            if interval is not None:
+                self.async_monitor.update_interval(interval)
+                self.logger.info(f"Updated monitoring interval to {interval} seconds")
+                
+            # Start the monitoring
+            self.async_monitor.start_monitoring()
+            
+            status_msg = f"Advanced real-time monitoring started (interval: {interval or 'default'}s)"
+            self.update_status(status_msg)
+            self.logger.info(status_msg)
+            
+        except Exception as e:
+            self.logger.error(f"Failed to start async monitoring: {e}")
+            raise
