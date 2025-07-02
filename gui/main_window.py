@@ -18,6 +18,7 @@ from .analytics_dashboard import AnalyticsDashboard
 from data.forex_api import ForexAPI
 from models.advanced_realtime_monitor import AdvancedRealtimeMonitor, MonitoringConfig
 from models.async_realtime_monitor import AsyncMonitoringMixin
+from models.real_time_ml_monitor import RealTimeMLMonitor
 from data.data_processor import DataProcessor
 from models.pattern_detector import PatternDetector
 from utils.helpers import save_results, load_results
@@ -50,6 +51,9 @@ class MainWindow(AsyncMonitoringMixin):
         self.advanced_monitor = None
         self.monitoring_symbols = ["AAPL", "MSFT", "TSLA"]  # Default symbols
         self.monitoring_timeframes = ["daily", "1h"]  # Default to supported timeframes
+        
+        # ML Pattern Monitoring System
+        self.ml_monitor = RealTimeMLMonitor(self, logger)
         
         # Initialize async monitoring
         self.__init_async_monitoring__()
@@ -152,6 +156,7 @@ class MainWindow(AsyncMonitoringMixin):
         tools_menu.add_command(label="Alert Preferences", command=self.show_preferences)
         tools_menu.add_separator()
         tools_menu.add_command(label="Advanced Monitoring Setup", command=self.show_advanced_monitoring_setup)
+        tools_menu.add_command(label="ML Pattern Monitoring", command=self.toggle_ml_monitoring)
         tools_menu.add_command(label="Monitoring Status", command=self.show_monitoring_status)
         tools_menu.add_separator()
         tools_menu.add_command(label="Analytics Dashboard", command=self.show_analytics_dashboard)
@@ -1388,3 +1393,61 @@ FEATURES:
         except Exception as e:
             self.logger.error(f"Failed to start async monitoring: {e}")
             raise
+
+    def toggle_ml_monitoring(self):
+        """Toggle ML pattern monitoring system"""
+        if not hasattr(self, "ml_monitor"):
+            messagebox.showerror("Error", "ML Monitor not initialized")
+            return
+            
+        if self.ml_monitor.monitoring_active:
+            # Stop monitoring
+            self.ml_monitor.stop_monitoring()
+            messagebox.showinfo("ML Monitoring", "Machine Learning pattern monitoring stopped")
+        else:
+            # Start monitoring
+            self.ml_monitor.start_monitoring()
+            messagebox.showinfo("ML Monitoring", 
+                              f"Machine Learning pattern monitoring started!\n\n"
+                              f"Monitoring {len(self.ml_monitor.config[\"symbols\"])} symbols:\n"
+                              f"{", ".join(self.ml_monitor.config[\"symbols\"])}\n\n"
+                              f"Check interval: {self.ml_monitor.config[\"check_interval\"]} seconds\n"
+                              f"Minimum confidence: {self.ml_monitor.config[\"min_confidence\"]:.0%}")
+    
+    def show_ml_monitoring_config(self):
+        """Show ML monitoring configuration dialog"""
+        config_window = tk.Toplevel(self.root)
+        config_window.title("ML Pattern Monitoring Configuration")
+        config_window.geometry("500x400")
+        config_window.transient(self.root)
+        config_window.grab_set()
+        
+        # Center window
+        config_window.update_idletasks()
+        x = (config_window.winfo_screenwidth() // 2) - (config_window.winfo_width() // 2)
+        y = (config_window.winfo_screenheight() // 2) - (config_window.winfo_height() // 2)
+        config_window.geometry(f"+{x}+{y}")
+        
+        main_frame = ttk.Frame(config_window, padding=20)
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        ttk.Label(main_frame, text="ML Pattern Monitoring Configuration", 
+                 font=("Arial", 14, "bold")).pack(pady=(0,20))
+        
+        # Current status
+        status_frame = ttk.LabelFrame(main_frame, text="Current Status", padding=10)
+        status_frame.pack(fill=tk.X, pady=(0,10))
+        
+        status_text = "ACTIVE" if self.ml_monitor.monitoring_active else "INACTIVE"
+        ttk.Label(status_frame, text=f"Status: {status_text}").pack(anchor="w")
+        
+        stats = self.ml_monitor.get_monitoring_stats()
+        ttk.Label(status_frame, text=f"Patterns detected today: {stats[\"patterns_detected_today\"]}").pack(anchor="w")
+        ttk.Label(status_frame, text=f"Total patterns: {stats[\"total_patterns_detected\"]}").pack(anchor="w")
+        
+        # Buttons
+        button_frame = ttk.Frame(main_frame)
+        button_frame.pack(fill=tk.X, pady=(20,0))
+        
+        ttk.Button(button_frame, text="Close", command=config_window.destroy).pack(side=tk.RIGHT, padx=5)
+
