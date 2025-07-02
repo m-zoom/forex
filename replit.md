@@ -126,6 +126,10 @@ Changelog:
 - June 25, 2025. Fixed AsyncRealtimeMonitor constructor signature error causing startup failure
 - June 25, 2025. Enhanced API key validation to properly use environment variables over config defaults
 - June 25, 2025. Integrated Financial Datasets API key for full real-time market data access
+- July 2, 2025. Integrated advanced ML pattern classifiers with real-time monitoring system
+- July 2, 2025. Added 4 sophisticated machine learning models: Triple Bottom, Double Bottom, Double Top, Inverse Head & Shoulders
+- July 2, 2025. Implemented real-time ML monitoring with confidence scoring and intelligent alerts
+- July 2, 2025. Added ML monitoring controls to GUI with live status updates and pattern statistics
 ```
 
 ## User Preferences

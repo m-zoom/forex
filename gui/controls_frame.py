@@ -49,6 +49,7 @@ class ControlsFrame(ttk.Frame):
         # Create sections
         self.create_data_section(scrollable_frame)
         self.create_pattern_section(scrollable_frame)
+        self.create_ml_monitoring_section(scrollable_frame)
         self.create_realtime_section(scrollable_frame)
         self.create_training_section(scrollable_frame)
         self.create_info_section(scrollable_frame)
@@ -184,6 +185,58 @@ class ControlsFrame(ttk.Frame):
                                font=("Arial", 9), foreground="gray")
         count_label.pack(anchor=tk.W, pady=(5,0))
         
+    def create_ml_monitoring_section(self, parent):
+        """Create ML pattern monitoring controls"""
+        ml_frame = ttk.LabelFrame(parent, text="🤖 ML Pattern Monitoring", padding=15)
+        ml_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        # Status display
+        status_frame = ttk.Frame(ml_frame)
+        status_frame.pack(fill=tk.X, pady=(0,10))
+        
+        ttk.Label(status_frame, text="Status:", font=("Arial", 10, "bold")).pack(side=tk.LEFT)
+        self.ml_status_var = tk.StringVar(value="🔴 Inactive")
+        ttk.Label(status_frame, textvariable=self.ml_status_var, font=("Arial", 10)).pack(side=tk.RIGHT)
+        
+        # Statistics
+        stats_frame = ttk.Frame(ml_frame)
+        stats_frame.pack(fill=tk.X, pady=(0,10))
+        
+        ttk.Label(stats_frame, text="Patterns Found:", font=("Arial", 9)).pack(side=tk.LEFT)
+        self.patterns_found_var = tk.StringVar(value="0")
+        ttk.Label(stats_frame, textvariable=self.patterns_found_var, font=("Arial", 9, "bold")).pack(side=tk.RIGHT)
+        
+        # Control buttons
+        button_frame = ttk.Frame(ml_frame)
+        button_frame.pack(fill=tk.X, pady=(0,10))
+        
+        self.ml_start_button = ttk.Button(
+            button_frame,
+            text="🚀 Start ML Monitor",
+            command=self.toggle_ml_monitoring,
+            width=15
+        )
+        self.ml_start_button.pack(side=tk.LEFT, padx=(0,5))
+        
+        self.ml_config_button = ttk.Button(
+            button_frame,
+            text="⚙️ Config",
+            command=self.show_ml_config,
+            width=8
+        )
+        self.ml_config_button.pack(side=tk.RIGHT)
+        
+        # Quick symbols
+        symbols_frame = ttk.Frame(ml_frame)
+        symbols_frame.pack(fill=tk.X, pady=(5,0))
+        
+        ttk.Label(symbols_frame, text="Quick Symbols:", font=("Arial", 9)).pack(anchor=tk.W)
+        symbols_text = "AAPL, MSFT, GOOGL, TSLA, NVDA"
+        ttk.Label(symbols_frame, text=symbols_text, font=("Arial", 8), foreground="gray").pack(anchor=tk.W, pady=(2,0))
+        
+        # Update ML status periodically
+        self.update_ml_status()
+    
     def create_realtime_section(self, parent):
         """Create real-time monitoring controls"""
         realtime_frame = ttk.LabelFrame(parent, text="⏱️ Real-time Monitoring", padding=15)
@@ -618,3 +671,50 @@ class ControlsFrame(ttk.Frame):
     def export_chart(self):
         """Export current chart"""
         self.main_window.export_chart()
+
+    def toggle_ml_monitoring(self):
+        """Toggle ML pattern monitoring"""
+        try:
+            self.main_window.toggle_ml_monitoring()
+            self.update_ml_status()
+        except Exception as e:
+            messagebox.showerror("ML Monitoring Error", f"Error toggling ML monitoring: {str(e)}")
+    
+    def show_ml_config(self):
+        """Show ML monitoring configuration"""
+        try:
+            if hasattr(self.main_window, "show_ml_monitoring_config"):
+                self.main_window.show_ml_monitoring_config()
+            else:
+                messagebox.showinfo("Configuration", "ML monitoring configuration not available")
+        except Exception as e:
+            messagebox.showerror("Configuration Error", f"Error showing ML config: {str(e)}")
+    
+    def update_ml_status(self):
+        """Update ML monitoring status display"""
+        try:
+            if hasattr(self.main_window, "ml_monitor") and self.main_window.ml_monitor:
+                ml_monitor = self.main_window.ml_monitor
+                
+                if ml_monitor.monitoring_active:
+                    self.ml_status_var.set("🟢 Active")
+                    self.ml_start_button.config(text="🛑 Stop ML Monitor")
+                else:
+                    self.ml_status_var.set("🔴 Inactive")
+                    self.ml_start_button.config(text="🚀 Start ML Monitor")
+                
+                # Update pattern count
+                stats = ml_monitor.get_monitoring_stats()
+                patterns_today = stats.get("patterns_detected_today", 0)
+                total_patterns = stats.get("total_patterns_detected", 0)
+                self.patterns_found_var.set(f"{patterns_today} today / {total_patterns} total")
+            else:
+                self.ml_status_var.set("🔴 Not Available")
+                self.patterns_found_var.set("0")
+                
+            # Schedule next update
+            self.after(5000, self.update_ml_status)
+            
+        except Exception as e:
+            self.main_window.logger.error(f"Error updating ML status: {str(e)}")
+
