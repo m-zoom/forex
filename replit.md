@@ -123,6 +123,9 @@ Changelog:
 - June 25, 2025. Created comprehensive user documentation (USER_GUIDE.md) and quick start guide for easy onboarding
 - June 25, 2025. Fixed advanced real-time monitoring interval configuration - user settings (10-300s) now properly applied to monitoring system
 - June 25, 2025. Resolved candlestick chart "zero-size array" error with enhanced data validation and minimum data requirements
+- June 25, 2025. Fixed AsyncRealtimeMonitor constructor signature error causing startup failure
+- June 25, 2025. Enhanced API key validation to properly use environment variables over config defaults
+- June 25, 2025. Integrated Financial Datasets API key for full real-time market data access
 ```
 
 ## User Preferences
