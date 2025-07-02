@@ -1407,12 +1407,13 @@ FEATURES:
         else:
             # Start monitoring
             self.ml_monitor.start_monitoring()
+            symbols_str = ", ".join(self.ml_monitor.config["symbols"])
             messagebox.showinfo("ML Monitoring", 
                               f"Machine Learning pattern monitoring started!\n\n"
-                              f"Monitoring {len(self.ml_monitor.config[\"symbols\"])} symbols:\n"
-                              f"{", ".join(self.ml_monitor.config[\"symbols\"])}\n\n"
-                              f"Check interval: {self.ml_monitor.config[\"check_interval\"]} seconds\n"
-                              f"Minimum confidence: {self.ml_monitor.config[\"min_confidence\"]:.0%}")
+                              f"Monitoring {len(self.ml_monitor.config['symbols'])} symbols:\n"
+                              f"{symbols_str}\n\n"
+                              f"Check interval: {self.ml_monitor.config['check_interval']} seconds\n"
+                              f"Minimum confidence: {self.ml_monitor.config['min_confidence']:.0%}")
     
     def show_ml_monitoring_config(self):
         """Show ML monitoring configuration dialog"""
